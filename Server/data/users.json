@@ -1,0 +1,5 @@
+{"people": [
+    {"email": "abc@gmail.com", "username": "abc", "pwd": "123", "birthdate": "1/1/1990", "age": "1", "id": "1"},
+    {"email": "def@gmail.com", "username": "def", "pwd": "123", "birthdate": "1/1/1990", "age": "1", "id": "2"},
+    {"email": "ghi@gmail.com", "username": "ghi", "pwd": "123", "birthdate": "1/1/1990", "age": "1", "id": "3"}
+]}
