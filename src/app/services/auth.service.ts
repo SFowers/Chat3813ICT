@@ -18,6 +18,9 @@ export class AuthService {
       return false;
     }
   }
+  signup(email:string, username:string, pwd:string) {
+    return this.http.post<User>('http://localhost:3000/api/signup', {email: email, username: username, pwd: pwd});
+  }
 
   login(email:string, pwd:string) {
     return this.http.post<User>('http://localhost:3000/api/auth', {email: email, upwd: pwd});

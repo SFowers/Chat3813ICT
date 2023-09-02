@@ -1,0 +1,19 @@
+<div class="signup-container">
+    <form (submit)="signup($event)">
+        <div class="form-item">
+            <label class="form-label"></label>
+            <input type="text" [(ngModel)]="email" name="email" class="form-input"/>
+        </div>
+        <div class="form-item">
+            <label class="form-label"></label>
+            <input type="text" [(ngModel)]="username" name="username" class="form-input"/>
+        </div>
+        <div class="form-item">
+            <label class="form-label"></label>
+            <input type="password" [(ngModel)]="pwd" name="pwd" class="form-input"/>
+        </div>
+        <div class="form-item">
+            <button type="button" class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

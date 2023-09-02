@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { AccountComponent } from './account/account.component';
 import { SuperControlsComponent } from './super-controls/super-controls.component';
 import { ChatComponent } from './chat/chat.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ChatComponent } from './chat/chat.component';
     LoginComponent,
     AccountComponent,
     SuperControlsComponent,
-    ChatComponent
+    ChatComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

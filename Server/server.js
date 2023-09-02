@@ -30,6 +30,7 @@ let server = http.listen(PORT, function () {
 });
 
 require('./routes/api-login.js')(app, path, fs);
+require('./routes/api-signup.js')(app, path, fs);
 
 //sockets.connect(io, PORT);
 
