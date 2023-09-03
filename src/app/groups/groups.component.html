@@ -1,0 +1,13 @@
+<div class="groups-container">
+    <div *ngIf="myGroups.length > 0" class="group-list-container">
+        <ul>
+            <li *ngFor="let g of myGroups">{{g}}</li>
+        </ul>
+    </div>
+    <div *ngIf="myGroups.length == 0">
+        <h3>Find More Groups</h3>
+        <ul>
+            <li *ngFor="let group of allGroups">{{group}}</li>
+        </ul>
+    </div>
+</div>

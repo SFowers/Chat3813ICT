@@ -12,6 +12,7 @@ import { AccountComponent } from './account/account.component';
 import { SuperControlsComponent } from './super-controls/super-controls.component';
 import { ChatComponent } from './chat/chat.component';
 import { SignupComponent } from './signup/signup.component';
+import { GroupsComponent } from './groups/groups.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SignupComponent } from './signup/signup.component';
     AccountComponent,
     SuperControlsComponent,
     ChatComponent,
-    SignupComponent
+    SignupComponent,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,

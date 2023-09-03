@@ -32,8 +32,7 @@ export class LoginComponent {
       next:
         (data)=>{
           if(data.id != 0) {
-            console.log('here');
-            this.newuser = new User(data.username, data.email, '', data.id);
+            this.newuser = new User(data.username, data.email, '', data.permission, data.roles, data.groups, data.id);
             this.auth.setCurrentUser(this.newuser);
             console.log(this.auth.getCurrentUser);
             this.router.navigate(['/account']);

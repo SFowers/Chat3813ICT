@@ -4,12 +4,13 @@ module.exports = function (app, path, fs) {
         if(!req.body) {
             return res.sendStatus(400);
         }
-        fs.readFile('data/users.json','utf8',(err,data)=>{
+        fs.readFile('data/users.json','utf8',(err,users)=>{
             if (err) {
                 console.error(err)
                 return
             }
             try{
+                console.log(req.body.username);
                 users = JSON.parse(users);
                 
                 for(let i = 0; i < users.people.length; i++) {
@@ -22,7 +23,8 @@ module.exports = function (app, path, fs) {
                 users.people.push({"username": req.body.username,
                                     "email": req.body.email, 
                                     "password": req.body.password,
-                                    "role": "user",
+                                    "permission": "user",
+                                    "roles": [],
                                     "groups": [],
                                     "id": users.people.length + 1});
 
@@ -36,7 +38,7 @@ module.exports = function (app, path, fs) {
                     }
                 })
             }catch(err){
-              console.log("Error parsing the user data on sign up");
+              console.log("Error parsing the user data on sign up" + err);
             }
         })
     });

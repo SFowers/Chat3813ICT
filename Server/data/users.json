@@ -1,5 +1,1 @@
-{"people": [
-    {"username": "super", "email": "super@admin.com", "pwd": "123", "role": "super admin", "groups": [], "id": "1"},
-    {"username": "def", "pwd": "123",  "id": "2"},
-    {"username": "ghi", "pwd": "123",  "id": "3"}
-]}
+{"people":[{"username":"super","email":"super@admin.com","pwd":"123","permission":"super admin","roles":[],"groups":[],"id":1}]}

@@ -20,6 +20,9 @@ module.exports = function (app, path, fs) {
                 customer.id=0;
                 customer.email = '';
                 customer.username = '';
+                customer.permission = '';
+                customer.roles = [];
+                customer.groups = [];
     
                 for (let i = 0; i < users.length; i++) {
                     if (req.body.email == users[i].email && req.body.upwd == users[i].pwd) {
@@ -27,6 +30,9 @@ module.exports = function (app, path, fs) {
                         customer.email = users[i].email;
                         customer.username = users[i].username;
                         customer.pwd = "";
+                        customer.permission = users[i].permission;
+                        customer.roles = users[i].roles;
+                        customer.groups = users[i].roles;
                     }
                 }
                 res.send(customer);
