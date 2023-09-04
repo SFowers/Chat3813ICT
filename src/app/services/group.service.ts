@@ -9,6 +9,14 @@ export class GroupService {
 
   constructor(private router:Router, private http:HttpClient) {}
 
+  createGroup() {
+
+  }
+
+  createChannel() {
+    
+  }
+
   getAllGroups() {
     return this.http.get<string>('http://localhost:3000/api/getgroups', {});
   }

@@ -23,6 +23,7 @@ module.exports = function (app, path, fs) {
                 chatgroups.push({"groupname": req.body.groupname, 
                                     "admins": [req.body.admin],
                                     "users": [req.body.admin],
+                                    "channels": [],
                                     "applied": [],
                                     "id": chatgroups.length + 1});
 
