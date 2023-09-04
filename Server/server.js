@@ -25,8 +25,10 @@ const server = require('./listen.js');
 require('./routes/api-login.js')(app, path, fs);
 require('./routes/api-signup.js')(app, path, fs);
 require('./routes/api-updateuser.js')(app, path, fs);
-require('./routes/api-creategroup')(app, path, fs);
-require('./routes/api-getgroups')(app, fs);
+require('./routes/api-creategroup.js')(app, path, fs);
+require('./routes/api-getgroups.js')(app, fs);
+require('./routes/api-deleteuser.js')(app, fs);
+require('./routes/api-adminapplication.js')(app, fs);
 
 sockets.connect(io, PORT);
 server.listen(http, PORT)

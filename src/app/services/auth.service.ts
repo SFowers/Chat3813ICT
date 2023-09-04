@@ -30,7 +30,7 @@ export class AuthService {
   }
   logout(event:any) {
     sessionStorage.removeItem('currentUser');
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/login');
   }
   setCurrentUser(newuser:any) {
     sessionStorage.setItem('currentUser', JSON.stringify(newuser));

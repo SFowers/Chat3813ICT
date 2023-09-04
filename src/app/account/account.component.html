@@ -1,5 +1,5 @@
 <div class="account-container">
-    <h1>Update Account Details</h1>
+    <h1>Update Account Details of {{currentUser.username}} </h1>
     <form>
         <form (submit)="updateAccount($event)">
             <div class="form-item">
@@ -26,10 +26,14 @@
     </form>
     <br><br>
     <div>
-        <button (click)="groupAdminApplication($event)">Apply for group administration</button>
+        <button (click)="groupAdminApplication()">Apply for Group Administration</button>
+    </div>
+    <div>
+        <button (click)="superAdminApplication()">Apply for Super Administration</button>
     </div>
     <br><br>
     <div>
-        <button (click)="deleteAccount($event)">Delete Account</button>
+        <h1>Delete Account: {{currentUser.username}}</h1>
+        <button (click)="deleteAccount()">Delete Account {{currentUser.username}}</button>
     </div>
 </div>
