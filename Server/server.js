@@ -24,6 +24,7 @@ const server = require('./listen.js');
 
 require('./routes/api-login.js')(app, path, fs);
 require('./routes/api-signup.js')(app, path, fs);
+require('./routes/api-updateuser.js')(app, path, fs);
 require('./routes/api-creategroup')(app, path, fs);
 require('./routes/api-getgroups')(app, fs);
 

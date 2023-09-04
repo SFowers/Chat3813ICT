@@ -37,7 +37,7 @@ export class LoginComponent {
             console.log(this.auth.getCurrentUser);
             this.router.navigate(['/account']);
           } else {
-            console.log("There is a problem with the credentials");
+            console.log("There is a problem with the credentials" + JSON.stringify(data));
           }   
         }
     })

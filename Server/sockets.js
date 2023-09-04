@@ -4,7 +4,7 @@ module.exports = {
             console.log('user connection on port ' + PORT + ' : ' + socket.id);
 
             socket.on('message', (message) => {
-                console.log('messahe recieved');
+                console.log('message recieved');
                 io.emit('message', message);
             });
             socket.on('disconnect', () => {

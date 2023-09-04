@@ -4,27 +4,27 @@ module.exports = function (app, path, fs) {
         if(!req.body) {
             return res.sendStatus(400);
         }
-        fs.readFile('data/groups.json','utf8',(err,groups)=>{
+        fs.readFile('data/groups.json','utf8',(err,data)=>{
             if (err) {
                 console.error(err)
                 return
             }
             try{
                 console.log("Create Groups");
-                chatgroups = JSON.parse(groups);
+                chatgroups = JSON.parse(data);
                 
-                for(let i = 0; i < chatgroups.groups.length; i++) {
-                    if(chatgroups.groups[i].groupname == req.body.username) {
+                for(let i = 0; i < chatgroups.length; i++) {
+                    if(chatgroups[i].groupname == req.body.username) {
                         console.log("Group Name already exists");
                         return res.sendStatus(400);
                     }
                 }
 
-                chatgroups.groups.push({"groupname": req.body.groupname, 
+                chatgroups.push({"groupname": req.body.groupname, 
                                     "admins": [req.body.admin],
                                     "users": [req.body.admin],
                                     "applied": [],
-                                    "id": chatgroups.groups.length + 1});
+                                    "id": chatgroups.length + 1});
 
                 fs.writeFile("data/groups.json", JSON.stringify(chatgroups), (err) => {
                     if (err) {
@@ -32,7 +32,7 @@ module.exports = function (app, path, fs) {
                         return res.sendStatus(400);
                     } else {
                         console.log("File written successfully\n");
-                        res.send({id: chatgroups.groups.length});
+                        res.send({id: chatgroups.length});
                     }
                 })
             }catch(err){

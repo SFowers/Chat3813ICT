@@ -6,7 +6,7 @@ module.exports = function (app, fs) {
                 return
             }
             try {
-                console.log("Get Groups" + JSON.stringify(data));
+                //console.log("Get Groups" + JSON.stringify(data));
                 res.send(JSON.stringify(data));
             } catch (err) {
                 console.log("Error getting list of groups");

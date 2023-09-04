@@ -1,6 +1,6 @@
 module.exports = function (app, path, fs) {
     
-    app.post("/api/signup", function (req, res) {
+    app.post("/api/updateuser", function (req, res) {
         if(!req.body) {
             return res.sendStatus(400);
         }
@@ -14,19 +14,12 @@ module.exports = function (app, path, fs) {
                 users = JSON.parse(users);
                 
                 for(let i = 0; i < users.people.length; i++) {
-                    if(users.people[i].username == req.body.username) {
-                        console.log("Username already exists");
-                        return res.sendStatus(400);
+                    if(users.people[i].username == req.body.username && users.people[i].pwd == req.body.pwd) {
+                        users.people[i].username = req.body.username;
+                        users.people[i].email = req.body.email;
+                        users.people[i].pwd = req.body.pwd;
                     }
                 }
-
-                users.people.push({"username": req.body.username,
-                                    "email": req.body.email, 
-                                    "pwd": req.body.pwd,
-                                    "permission": "user",
-                                    "roles": [],
-                                    "groups": [],
-                                    "id": users.people.length + 1});
 
                 fs.writeFile("data/users.json", JSON.stringify(users), (err) => {
                     if (err) {
@@ -34,11 +27,10 @@ module.exports = function (app, path, fs) {
                         return res.sendStatus(400);
                     } else {
                         console.log("File written successfully\n");
-                        res.send({id: users.people.length});
                     }
                 })
             }catch(err){
-              console.log("Error parsing the user data on sign up" + err);
+              console.log("Error parsing the user data on account update" + err);
             }
         })
     });

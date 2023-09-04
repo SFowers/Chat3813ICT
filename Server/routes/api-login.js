@@ -25,7 +25,9 @@ module.exports = function (app, path, fs) {
                 customer.groups = [];
     
                 for (let i = 0; i < users.length; i++) {
-                    if (req.body.email == users[i].email && req.body.upwd == users[i].pwd) {
+                    console.log(users[i].email);
+                    if ((req.body.email == users[i].email || req.body.email == users[i].username) && req.body.pwd == users[i].pwd) {
+                        console.log(users[i].username);
                         customer.id = users[i].id;
                         customer.email = users[i].email;
                         customer.username = users[i].username;
@@ -33,11 +35,12 @@ module.exports = function (app, path, fs) {
                         customer.permission = users[i].permission;
                         customer.roles = users[i].roles;
                         customer.groups = users[i].roles;
+                        //res.send(customer);
                     }
                 }
                 res.send(customer);
             }catch(err){
-              console.log("Error parsing the userdata at login");
+              console.log("Error parsing the userdata at login. " + err);
             }
         })
     });

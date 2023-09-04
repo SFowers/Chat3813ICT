@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -11,11 +11,12 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'chat';
 
-  constructor(private auth:AuthService) {}
+  constructor(private auth:AuthService, private router:Router) {}
 
   ngOnInit() {}
 
   logOut(event:any) {
     this.auth.logout(event);
+    this.router.navigate(['/login']);
   }
 }

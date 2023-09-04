@@ -1,13 +1,14 @@
 <div class="groups-container">
     <div *ngIf="myGroups.length > 0" class="group-list-container">
+        <h1>My Groups</h1>
         <ul>
-            <li *ngFor="let g of myGroups">{{g}}</li>
+            <li *ngFor="let g of myGroups"><button (click)="onSelect(g)">{{g.groupname}}</button></li>
         </ul>
     </div>
-    <div *ngIf="myGroups.length == 0">
-        <h3>Find More Groups</h3>
+    <div>
+        <h1>Find More Groups</h1>
         <ul>
-            <li *ngFor="let group of allGroups">{{group}}</li>
+            <li *ngFor="let group of allGroups"><button (click)="onSelect(group)">{{group.groupname}}</button></li>
         </ul>
     </div>
 </div>

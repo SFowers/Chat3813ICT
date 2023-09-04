@@ -1,5 +1,1 @@
-{"groups": [{"groupname": "supergroup", 
-            "admins": ["super"], 
-            "users": ["super"],
-            "applied": [],
-            "id": 1}]}
+[{"groupname": "supergroup", "admins": ["super"], "users": ["super"],"applied": [],"id": 1}]

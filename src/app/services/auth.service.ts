@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   login(email:string, pwd:string) {
-    return this.http.post<User>('http://localhost:3000/api/auth', {email: email, upwd: pwd});
+    return this.http.post<User>('http://localhost:3000/api/auth', {email: email, pwd: pwd});
   }
   updateUser(user:User) {
     return this.http.post<User>('http://localhost:3000/api/updateuser', {user: user});

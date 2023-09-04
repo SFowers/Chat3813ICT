@@ -21,21 +21,38 @@ export class GroupsComponent {
     this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
     this.groupService.getAllGroups().subscribe({
       next: (data) => {
-        console.log("data " + data);
         this.allGroups = JSON.parse(data);
-        console.log(this.allGroups);
+        //console.log("allgroups: " + this.allGroups[0].groupname);
+        this.getMyGroups();
       }
     });
-
-    
-    //for(let i = 0; i < this.allGroups.length; i++ ) {
-      //if(this.currentUser.username == this.allGroups[i].user) {
-
-      //}
-    //}
   }
 
-  onSelect() {
+  getMyGroups() {
+    for(let i = 0; i < this.allGroups.length; i++ ) {
+      console.log("test");
+      for(let j = 0; j < this.allGroups[i].users.length; j++) {
+        if(this.currentUser.username == this.allGroups[i].users[j]) {
+          this.myGroups.push(this.allGroups[i]);
+          console.log(this.myGroups)
+        }
+      }
+    }
+  }
 
+  onSelect(group:Group) {
+    //if(group.users.includes(this.currentUser.username))
+    let inGroup = false;
+    for(let j = 0; j < group.users.length; j++) {
+      if(this.currentUser.username == group.users[j]) {
+        console.log("in group");
+        inGroup = true;
+      }
+    }
+    if(inGroup) {
+      alert("in This group");
+    } else {
+      alert("not in this group");
+    }
   }
 }
