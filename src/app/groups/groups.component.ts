@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { GroupService } from '../services/group.service';
 import { User } from '../user';
@@ -15,10 +16,13 @@ export class GroupsComponent {
   myGroups:Group[] = [];
   allGroups:Group[] = [];
 
-  constructor(private auth:AuthService, private groupService:GroupService) {}
+  constructor(private auth:AuthService, private groupService:GroupService, private router:Router) {}
 
   ngOnInit() {
     this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
+    if(this.currentUser == null) {
+      this.router.navigate(['/account']);
+    }
     this.groupService.getAllGroups().subscribe({
       next: (data) => {
         this.allGroups = JSON.parse(data);
@@ -50,9 +54,11 @@ export class GroupsComponent {
       }
     }
     if(inGroup) {
-      alert("in This group");
+      //alert("in This group");
+      this.groupService.setCurrentGroup(group);
+      this.router.navigate(['/group']);
     } else {
-      alert("not in this group");
+      //alert("not in this group");
     }
   }
 }
