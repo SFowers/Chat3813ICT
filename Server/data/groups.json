@@ -1,1 +1,1 @@
-[{"groupname": "supergroup", "admins": ["super"], "users": ["super"],"channels":[],"applied": [],"id": 1}]
+[{"groupname": "supergroup", "admins": ["super"], "users": ["super"],"channels":["chan1", "chan2"],"applied": [],"id": 1}]

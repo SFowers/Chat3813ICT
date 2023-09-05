@@ -25,6 +25,8 @@
         </div>
     </form>
     <br><br>
+    <h3>Apply for admin permissions</h3>
+    <h4 *ngIf="applyMessage">{{applyMessage}}</h4>
     <div>
         <button (click)="groupAdminApplication()">Apply for Group Administration</button>
     </div>

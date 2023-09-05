@@ -13,6 +13,7 @@ import { SuperControlsComponent } from './super-controls/super-controls.componen
 import { ChatComponent } from './chat/chat.component';
 import { SignupComponent } from './signup/signup.component';
 import { GroupsComponent } from './groups/groups.component';
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GroupsComponent } from './groups/groups.component';
     SuperControlsComponent,
     ChatComponent,
     SignupComponent,
-    GroupsComponent
+    GroupsComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,

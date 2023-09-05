@@ -1,0 +1,33 @@
+<div class="group-container">
+    <h1>{{currentGroup.groupname}}</h1>
+    <div class="group-channels-container">
+        <ul>
+            <li *ngFor="let c of channels"><button (click)="onSelect(c)">{{c}}</button></li>
+        </ul>
+    </div>
+    <div class="gadmin-container" *ngIf="admin">
+        <div class="create-channel">
+            <h3>Create new Channel</h3>
+            <input [(ngModel)]="cname" />
+            <button>Create Channel</button>
+        </div>
+        <div class="gadmin-list">
+            <h3>{{currentGroup.groupname}} Admins</h3>
+            <ul>
+                <li *ngFor="let a of admins">{{a}}</li>
+            </ul>
+        </div>
+        <div class="gadmin-list">
+            <h3>{{currentGroup.groupname}} Users</h3>
+            <ul>
+                <li *ngFor="let u of users">{{u}}</li>
+            </ul>
+        </div>
+        <div class="gadmin-list">
+            <h3>{{currentGroup.groupname}} Applications</h3>
+            <ul>
+                <li *ngFor="let app of applied">{{app}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
