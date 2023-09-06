@@ -26,7 +26,7 @@
     <br><br>
     <div>
         <h3>Delete Account: {{currentUser.username}}</h3>
-        <button (click)="deleteAccount()">Delete Account {{currentUser.username}}</button>
+        <button (click)="deleteAccount($event)">DELETE ACCOUNT {{currentUser.username}}</button>
     </div>
     <br><br>
     <div *ngIf="currentUser.permission == superadmin">

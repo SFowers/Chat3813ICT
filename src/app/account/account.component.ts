@@ -11,6 +11,7 @@ import { ApplicationsService } from '../services/applications.service';
 })
 export class AccountComponent {
 
+  newuser:User = new User();
   currentUser:User = new User();
   username:string = '';
   email:string = '';
@@ -56,21 +57,28 @@ export class AccountComponent {
     this.router.navigate(['super']);
   }
 
-  deleteAccount() {
+  deleteAccount(event:any) {
     this.auth.deleteUser(this.currentUser).subscribe({
       next:
         (data)=>{
           console.log(data);
+          this.auth.logout(event);
+          this.router.navigate(['/login']);
         }
     })
+    this.auth.logout(event);
+    this.router.navigate(['/login']);
   }
 
   updateAccount(event:any) {
+    event.preventDefault();
+    this.currentUser.username = this.username;
+    this.currentUser.email = this.email;
     this.auth.updateUser(this.currentUser).subscribe({
       next:
         (data)=>{
-          this.auth.setCurrentUser(data);
-          console.log(data);
+          this.newuser = new User(data.username, data.email, '', data.permission, data.id);
+          this.auth.setCurrentUser(this.newuser);
         }
     })
   }

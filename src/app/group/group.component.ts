@@ -76,7 +76,7 @@ export class GroupComponent {
     })
   }
 
-  deleteGroup() {
+  deleteGroup(event:any) {
     this.groupService.deleteGroup(this.currentGroup).subscribe({
       next:
         (res)=>{

@@ -29,6 +29,10 @@ export class GroupService {
   getCurrentGroup() {
     return sessionStorage.getItem('currentGroup');
   }
+  removeCurrentGroup(event:any) {
+    sessionStorage.removeItem('currentGroup');
+    this.router.navigateByUrl('/groups');
+  }
   deleteGroup(group:Group) {
     sessionStorage.removeItem('currentGroup');
     return this.http.post<string>('http://localhost:3000/api/deletegroup', {group:group});

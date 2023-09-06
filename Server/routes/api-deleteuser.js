@@ -24,6 +24,7 @@ module.exports = function (app, fs) {
                         return res.sendStatus(400);
                     } else {
                         console.log("User deleted successfully\n");
+                        res.send("User deleted successfully");
                     }
                 })
             }catch(err){

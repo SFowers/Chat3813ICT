@@ -50,3 +50,14 @@ a:hover {
     background-color: #181e24;
     margin: 1%;
 }
+
+button {
+    background-color: #9dcbe9; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
