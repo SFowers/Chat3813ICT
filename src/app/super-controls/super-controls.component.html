@@ -1,1 +1,13 @@
 <p>super-controls works!</p>
+<div class="supercontrols-container">
+    <div *ngIf="applications.length > 0" class="application-list-container">
+        <h1>New Applications</h1>
+        <ul>
+            <li *ngFor="let a of applications">
+                <div>User: {{a.username}}<br>For Position: {{a.permission}}</div>
+                <button (click)="onApprove(a)">Approve</button>
+                <button (click)="onDisapprove(a)">Disapprove</button>
+            </li>
+        </ul>
+    </div>
+</div>

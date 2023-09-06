@@ -29,6 +29,7 @@ require('./routes/api-creategroup.js')(app, path, fs);
 require('./routes/api-getgroups.js')(app, fs);
 require('./routes/api-deleteuser.js')(app, fs);
 require('./routes/api-adminapplication.js')(app, fs);
+require('./routes/api-getapplications.js')(app, fs);
 require('./routes/api-updategroup.js')(app, fs);
 
 sockets.connect(io, PORT);

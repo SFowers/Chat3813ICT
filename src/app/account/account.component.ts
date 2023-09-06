@@ -18,6 +18,8 @@ export class AccountComponent {
   permission:string = '';
   applyMessage:string = '';
   error:string = '';
+  groupadmin:string = 'group admin';
+  superadmin:string = 'super admin';
 
   constructor(private auth:AuthService, private application:ApplicationsService, private router:Router) {}
 
@@ -48,6 +50,10 @@ export class AccountComponent {
           console.log(data);
         }
     })
+  }
+
+  superControls() {
+    this.router.navigate(['super']);
   }
 
   deleteAccount() {

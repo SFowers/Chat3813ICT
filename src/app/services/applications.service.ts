@@ -19,7 +19,7 @@ export class ApplicationsService {
   }
 
   getApplications() {
-    return this.http.get<Application>('http://localhost:3000/api/getapplications', {});
+    return this.http.get<string>('http://localhost:3000/api/getapplications', {});
   }
 }
 

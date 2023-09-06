@@ -15,6 +15,10 @@ export class GroupsComponent {
   currentUser:User = new User();
   myGroups:Group[] = [];
   allGroups:Group[] = [];
+  gadmin:string = 'group admin';
+  sadmin:string = 'super admin';
+  groupname:string = '';
+  error:string = '';
 
   constructor(private auth:AuthService, private groupService:GroupService, private router:Router) {}
 
@@ -23,6 +27,11 @@ export class GroupsComponent {
     if(this.currentUser == null) {
       this.router.navigate(['/account']);
     }
+    this.getAllGroups();
+  }
+
+  getAllGroups() {
+    this.allGroups = [];
     this.groupService.getAllGroups().subscribe({
       next: (data) => {
         this.allGroups = JSON.parse(data);
@@ -34,11 +43,10 @@ export class GroupsComponent {
 
   getMyGroups() {
     for(let i = 0; i < this.allGroups.length; i++ ) {
-      console.log("test");
       for(let j = 0; j < this.allGroups[i].users.length; j++) {
         if(this.currentUser.username == this.allGroups[i].users[j]) {
           this.myGroups.push(this.allGroups[i]);
-          console.log(this.myGroups)
+          //console.log(this.myGroups)
         }
       }
     }
@@ -46,6 +54,7 @@ export class GroupsComponent {
 
   onSelect(group:Group) {
     //if(group.users.includes(this.currentUser.username))
+    console.log(group + this.currentUser.username);
     let inGroup = false;
     for(let j = 0; j < group.users.length; j++) {
       if(this.currentUser.username == group.users[j]) {
@@ -58,7 +67,21 @@ export class GroupsComponent {
       this.groupService.setCurrentGroup(group);
       this.router.navigate(['/group']);
     } else {
-      //alert("not in this group");
+      console.log("Not in group");
+    }
+  }
+
+  createGroup(event:any) {
+    if(this.groupname == "") {
+      this.error = "Please give the group a name.";
+    } else {
+      event.preventDefault();
+      this.groupService.createGroup(this.groupname, this.currentUser.username).subscribe({
+        next:
+          (res)=>{
+            //this.getAllGroups();
+          }
+      })
     }
   }
 }

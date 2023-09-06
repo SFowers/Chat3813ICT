@@ -14,18 +14,21 @@ module.exports = function (app, path, fs) {
                 chatgroups = JSON.parse(data);
                 
                 for(let i = 0; i < chatgroups.length; i++) {
-                    if(chatgroups[i].groupname == req.body.username) {
+                    if(chatgroups[i].groupname == req.body.groupname) {
                         console.log("Group Name already exists");
                         return res.sendStatus(400);
                     }
                 }
 
-                chatgroups.push({"groupname": req.body.groupname, 
-                                    "admins": [req.body.admin],
-                                    "users": [req.body.admin],
-                                    "channels": [],
-                                    "applied": [],
-                                    "id": chatgroups.length + 1});
+                newgroup = {}
+                newgroup.groupname = req.body.groupname;
+                newgroup.admins = [req.body.username];
+                newgroup.users = [req.body.username];
+                newgroup.channels = [];
+                newgroup.applied = [];
+                newgroup.id = chatgroups.length + 1;
+
+                chatgroups.push(newgroup);
 
                 fs.writeFile("data/groups.json", JSON.stringify(chatgroups), (err) => {
                     if (err) {
@@ -33,7 +36,7 @@ module.exports = function (app, path, fs) {
                         return res.sendStatus(400);
                     } else {
                         console.log("File written successfully\n");
-                        res.send({id: chatgroups.length});
+                        res.send({group: newgroup});
                     }
                 })
             }catch(err){

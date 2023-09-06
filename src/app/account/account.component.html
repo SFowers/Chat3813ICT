@@ -27,15 +27,19 @@
     <br><br>
     <h3>Apply for admin permissions</h3>
     <h4 *ngIf="applyMessage">{{applyMessage}}</h4>
-    <div>
+    <div *ngIf="currentUser.permission != groupadmin">
         <button (click)="groupAdminApplication()">Apply for Group Administration</button>
     </div>
-    <div>
+    <div *ngIf="currentUser.permission != superadmin">
         <button (click)="superAdminApplication()">Apply for Super Administration</button>
     </div>
     <br><br>
     <div>
         <h1>Delete Account: {{currentUser.username}}</h1>
         <button (click)="deleteAccount()">Delete Account {{currentUser.username}}</button>
+    </div>
+    <br><br>
+    <div *ngIf="currentUser.permission == superadmin">
+        <button (click)="superControls()">Go to Super Admin Controls</button>
     </div>
 </div>

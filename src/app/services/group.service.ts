@@ -10,8 +10,8 @@ export class GroupService {
 
   constructor(private router:Router, private http:HttpClient) {}
 
-  createGroup(group:Group) {
-    return this.http.post<Group>('http://localhost:3000/api/creategroup', {group: group});
+  createGroup(groupname:string, username:string) {
+    return this.http.post<Group>('http://localhost:3000/api/creategroup', {groupname:groupname, username:username});
   }
 
   updateGroup(group:Group) {

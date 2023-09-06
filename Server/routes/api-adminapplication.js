@@ -30,7 +30,7 @@ module.exports = function (app, fs) {
                         return res.sendStatus(400);
                     } else {
                         console.log("Application File written successfully\n");
-                        res.send({m:"Application Made"});
+                        res.send({m:"Application Made for " + req.body.permission});
                     }
                 })
             }catch(err){
