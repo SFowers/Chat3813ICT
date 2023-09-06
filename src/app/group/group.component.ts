@@ -26,11 +26,9 @@ export class GroupComponent {
   ngOnInit() {
     this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
     this.currentGroup = JSON.parse(this.groupService.getCurrentGroup() || '{}');
-    this.channels = this.currentGroup.channels;
-    this.admins = this.currentGroup.admins;
-    this.users = this.currentGroup.users;
-    this.applied = this.currentGroup.applied;
-    
+    if(!this.currentGroup.groupname) {
+      this.router.navigateByUrl('/groups');
+    }
     this.checkGroupAdmin();
   }
 
@@ -41,6 +39,27 @@ export class GroupComponent {
       }
     }
   }
+
+  createChannel() {
+    this.currentGroup.channels.push(this.cname);
+    this.updateGroup();
+    this.cname = '';
+  }
+
+  addApplicant(app:string) {
+    for(let i = 0; i < this.currentGroup.applied.length; i++) {
+      if(this.currentGroup.applied[i] == app) {
+        this.currentGroup.applied.splice(i, 1);
+        this.currentGroup.users.push(app);
+      }
+    }
+    this.updateGroup();
+  }
+
+  addAdmin(user:string) {
+    this.currentGroup.admins.push(user);
+    this.updateGroup();
+  } 
 
   onSelect(channel:string) {
     console.log(channel)
@@ -55,5 +74,16 @@ export class GroupComponent {
           console.log(res + ' group updated');
         }
     })
+  }
+
+  deleteGroup() {
+    this.groupService.deleteGroup(this.currentGroup).subscribe({
+      next:
+        (res)=>{
+          console.log(res);
+          this.router.navigateByUrl('/groups');
+        }
+    });
+    this.router.navigate(['/groups']);
   }
 }

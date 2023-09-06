@@ -1,33 +1,42 @@
 <div class="group-container">
     <h1>{{currentGroup.groupname}}</h1>
     <div class="group-channels-container">
-        <ul>
-            <li *ngFor="let c of channels"><button (click)="onSelect(c)">{{c}}</button></li>
+        <h2>{{currentGroup.groupname}} Channels</h2>
+        <ul *ngFor="let c of currentGroup.channels">
+            <li ><button (click)="onSelect(c)">{{c}}</button></li>
         </ul>
     </div>
     <div class="gadmin-container" *ngIf="admin">
         <div class="create-channel">
             <h3>Create new Channel</h3>
             <input [(ngModel)]="cname" />
-            <button>Create Channel</button>
+            <button (click)="createChannel()">Create Channel</button>
         </div>
         <div class="gadmin-list">
             <h3>{{currentGroup.groupname}} Admins</h3>
             <ul>
-                <li *ngFor="let a of admins">{{a}}</li>
+                <li *ngFor="let a of currentGroup.admins">{{a}}</li>
             </ul>
         </div>
         <div class="gadmin-list">
             <h3>{{currentGroup.groupname}} Users</h3>
-            <ul>
-                <li *ngFor="let u of users">{{u}}</li>
+            <ul *ngFor="let u of currentGroup.users">
+                <li *ngIf="!currentGroup.admins.includes(u)">{{u}}
+                    <button (click)="addAdmin(u)">Add as Admin</button>
+                </li>
             </ul>
         </div>
         <div class="gadmin-list">
             <h3>{{currentGroup.groupname}} Applications</h3>
-            <ul>
-                <li *ngFor="let app of applied">{{app}}</li>
+            <ul *ngFor="let app of currentGroup.applied">
+                <li >{{app}}
+                    <button (click)="addApplicant(app)">Add Applicant</button>
+                </li>
             </ul>
+        </div>
+        <div class="gadmin-list">
+            <h3>Delete {{currentGroup.groupname}} Group</h3>
+            <button (click)="deleteGroup()">DELETE GROUP</button>
         </div>
     </div>
 </div>

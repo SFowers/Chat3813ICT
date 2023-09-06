@@ -25,7 +25,7 @@ export class GroupsComponent {
   ngOnInit() {
     this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
     if(this.currentUser == null) {
-      this.router.navigate(['/account']);
+      this.router.navigate(['/login']);
     }
     this.getAllGroups();
   }
@@ -42,6 +42,7 @@ export class GroupsComponent {
   }
 
   getMyGroups() {
+    this.myGroups = [];
     for(let i = 0; i < this.allGroups.length; i++ ) {
       for(let j = 0; j < this.allGroups[i].users.length; j++) {
         if(this.currentUser.username == this.allGroups[i].users[j]) {
@@ -53,8 +54,6 @@ export class GroupsComponent {
   }
 
   onSelect(group:Group) {
-    //if(group.users.includes(this.currentUser.username))
-    console.log(group + this.currentUser.username);
     let inGroup = false;
     for(let j = 0; j < group.users.length; j++) {
       if(this.currentUser.username == group.users[j]) {
@@ -67,7 +66,38 @@ export class GroupsComponent {
       this.groupService.setCurrentGroup(group);
       this.router.navigate(['/group']);
     } else {
-      console.log("Not in group");
+      if(this.currentUser.permission == this.sadmin) {
+        this.superJoinGroup(group);
+      } else {
+        this.applytogroup(group);
+      }
+    }
+  }
+
+  superJoinGroup(group:Group) {
+    group.admins.push(this.currentUser.username);
+    group.users.push(this.currentUser.username);
+    this.groupService.updateGroup(group).subscribe({
+      next:
+        (res)=>{
+          console.log(res + ' group updated');
+        }
+    })
+  }
+
+  applytogroup(group:Group) {
+    console.log(group.id);
+    if(!group.applied.includes(this.currentUser.username)) {
+      group.applied.push(this.currentUser.username);
+      this.groupService.updateGroup(group).subscribe({
+        next: (data) => {
+          //this.allGroups = JSON.parse(data);
+          //console.log("allgroups: " + this.allGroups[0].groupname);
+          //this.getMyGroups();
+        }
+      });
+    } else {
+      alert("Already applied to group " + group.groupname);
     }
   }
 
@@ -79,7 +109,8 @@ export class GroupsComponent {
       this.groupService.createGroup(this.groupname, this.currentUser.username).subscribe({
         next:
           (res)=>{
-            //this.getAllGroups();
+            console.log(res.groupname);
+            this.ngOnInit();
           }
       })
     }

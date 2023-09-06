@@ -15,12 +15,12 @@ module.exports = function (app, fs) {
                 group = {};
                 
                 for(let i = 0; i < chatgroups.length; i++) {
-                    if(chatgroups[i].id == req.body.id) {
-                        chatgroups[i].groupname = req.body.groupname;
-                        chatgroups[i].admins = req.body.admins;
-                        chatgroups[i].users = req.body.users;
-                        chatgroups[i].channels = req.body.channels;
-                        chatgroups[i].applied = req.body.applied;
+                    if(chatgroups[i].id == req.body.group.id) {
+                        chatgroups[i].groupname = req.body.group.groupname;
+                        chatgroups[i].admins = req.body.group.admins;
+                        chatgroups[i].users = req.body.group.users;
+                        chatgroups[i].channels = req.body.group.channels;
+                        chatgroups[i].applied = req.body.group.applied;
                         group = chatgroups[i];
                     }
                 }

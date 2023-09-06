@@ -27,10 +27,12 @@ require('./routes/api-signup.js')(app, path, fs);
 require('./routes/api-updateuser.js')(app, path, fs);
 require('./routes/api-creategroup.js')(app, path, fs);
 require('./routes/api-getgroups.js')(app, fs);
+require('./routes/api-deletegroup.js')(app, fs);
 require('./routes/api-deleteuser.js')(app, fs);
 require('./routes/api-adminapplication.js')(app, fs);
 require('./routes/api-getapplications.js')(app, fs);
 require('./routes/api-updategroup.js')(app, fs);
+require('./routes/api-getusers.js')(app, fs);
 
 sockets.connect(io, PORT);
 server.listen(http, PORT)

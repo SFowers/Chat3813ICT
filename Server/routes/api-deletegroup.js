@@ -1,29 +1,30 @@
 module.exports = function (app, fs) {
     
-    app.post("/api/deleteuser", function (req, res) {
+    app.post("/api/deletegroup", function (req, res) {
         if(!req.body) {
             return res.sendStatus(400);
         }
-        fs.readFile('data/users.json','utf8',(err,data)=>{
+        fs.readFile('data/groups.json','utf8',(err,data)=>{
             if (err) {
                 console.error(err)
                 return
             }
             try{
-                users = JSON.parse(data);
+                groups = JSON.parse(data);
                 
-                for(let i = 0; i < users.length; i++) {
-                    if(users[i].id == req.body.user.id) {
-                        users.splice(i, 1);
+                for(let i = 0; i < groups.length; i++) {
+                    if(groups[i].id == req.body.group.id) {
+                        groups.splice(i, 1);
                     }
                 }
 
-                fs.writeFile("data/users.json", JSON.stringify(users), (err) => {
+                fs.writeFile("data/groups.json", JSON.stringify(groups), (err) => {
                     if (err) {
                         console.log(err);
                         return res.sendStatus(400);
                     } else {
-                        console.log("User deleted successfully\n");
+                        console.log("Group deleted successfully\n");
+                        res.send("Group Deleted");
                     }
                 })
             }catch(err){

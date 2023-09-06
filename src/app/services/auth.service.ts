@@ -38,4 +38,10 @@ export class AuthService {
   getCurrentUser() {
     return sessionStorage.getItem('currentUser');
   }
+  getAllUsers() {
+    return this.http.get<string>('http://localhost:3000/api/getusers', {});
+  }
+  deleteUser(user:User) {
+    return this.http.post<string>('http://localhost:3000/api/deleteuser', {user: user});
+  }
 }

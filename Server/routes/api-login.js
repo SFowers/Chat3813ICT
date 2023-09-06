@@ -14,15 +14,13 @@ module.exports = function (app, path, fs) {
                 //console.log(data);
                 let users = JSON.parse(data);
                 //console.log(users);
-                users = users.people;
+                //users = users.people;
               
                 var customer = {};
                 customer.id=0;
                 customer.email = '';
                 customer.username = '';
                 customer.permission = '';
-                customer.roles = [];
-                customer.groups = [];
     
                 for (let i = 0; i < users.length; i++) {
                     console.log(users[i].email);
@@ -33,8 +31,6 @@ module.exports = function (app, path, fs) {
                         customer.username = users[i].username;
                         customer.pwd = "";
                         customer.permission = users[i].permission;
-                        customer.roles = users[i].roles;
-                        customer.groups = users[i].roles;
                         //res.send(customer);
                     }
                 }

@@ -6,6 +6,9 @@
                 <label class="form-label">Group Name</label>
                 <input type="text" [(ngModel)]="groupname" name="groupname" class="form-input"/>
             </div>
+            <div class="error-message" *ngIf="error">
+                {{error}}
+            </div>
             <div class="form-item">
                 <button type="button" class="btn btn-primary" type="submit">Create Group</button>
             </div>
@@ -13,14 +16,18 @@
     </div>
     <div *ngIf="myGroups.length > 0" class="group-list-container">
         <h1>My Groups</h1>
-        <ul>
-            <li *ngFor="let g of myGroups"><button (click)="onSelect(g)">{{g.groupname}}</button></li>
+        <ul *ngFor="let g of myGroups">
+            <li><button (click)="onSelect(g)">{{g.groupname}}</button></li>
         </ul>
     </div>
     <div>
         <h1>Find More Groups</h1>
-        <ul>
-            <li *ngFor="let group of allGroups"><button (click)="onSelect(group)">{{group.groupname}}</button></li>
+        <ul *ngFor="let g of allGroups" >
+            <li *ngIf="!g.users.includes(currentUser.username)">
+                <button  (click)="onSelect(g)">{{g.groupname}} 
+                    <div *ngIf="g.applied.includes(currentUser.username)">- Applied</div>
+                </button>
+            </li>
         </ul>
     </div>
 </div>

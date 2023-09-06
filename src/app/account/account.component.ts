@@ -14,7 +14,7 @@ export class AccountComponent {
   currentUser:User = new User();
   username:string = '';
   email:string = '';
-  pwd:string = '';
+  //pwd:string = '';
   permission:string = '';
   applyMessage:string = '';
   error:string = '';
@@ -57,15 +57,21 @@ export class AccountComponent {
   }
 
   deleteAccount() {
-
+    this.auth.deleteUser(this.currentUser).subscribe({
+      next:
+        (data)=>{
+          console.log(data);
+        }
+    })
   }
 
   updateAccount(event:any) {
-    alert("Not yet Implemented.");
-    /*
-    if(this.username == "" || this.email == "" || this.pwd == "") {
-      this.error = "Please fill all fields.";
-    }
-    */
+    this.auth.updateUser(this.currentUser).subscribe({
+      next:
+        (data)=>{
+          this.auth.setCurrentUser(data);
+          console.log(data);
+        }
+    })
   }
 }

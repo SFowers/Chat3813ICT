@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Application } from '../application';
 import { ApplicationsService } from '../services/applications.service';
+import { AuthService } from '../services/auth.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-super-controls',
@@ -9,10 +11,20 @@ import { ApplicationsService } from '../services/applications.service';
 })
 export class SuperControlsComponent {
   applications:Application[] = [];
+  users:User[] = [];
+  gadmin:string = 'group admin';
+  sadmin:string = 'super admin';
 
-  constructor(private applService:ApplicationsService) {}
+  constructor(private applService:ApplicationsService, private auth:AuthService) {}
 
   ngOnInit() {
+    this.auth.getAllUsers().subscribe({
+      next: (data) => {
+        //This is the only way it works for some reason
+        this.users = JSON.parse(JSON.stringify(data));
+      }
+    })
+    /*
     this.applService.getApplications().subscribe({
       next: (data) => {
         console.log(this.applications);
@@ -20,12 +32,16 @@ export class SuperControlsComponent {
         console.log(this.applications);
       }
     });
+    */
   }
 
-  onApprove(app:Application) {
-
-  }
-  onDisapprove(app:Application) {
-    
+  makeAdmin(user:User, perm:string) {
+    user.permission = perm;
+    this.auth.updateUser(user).subscribe({
+      next:
+        (data)=>{
+          console.log(data);
+        }
+    })
   }
 }

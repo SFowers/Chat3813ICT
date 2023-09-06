@@ -13,11 +13,11 @@ module.exports = function (app, path, fs) {
                 console.log(req.body.username);
                 users = JSON.parse(users);
                 
-                for(let i = 0; i < users.people.length; i++) {
-                    if(users.people[i].username == req.body.username && users.people[i].pwd == req.body.pwd) {
-                        users.people[i].username = req.body.username;
-                        users.people[i].email = req.body.email;
-                        users.people[i].pwd = req.body.pwd;
+                for(let i = 0; i < users.length; i++) {
+                    if(users[i].id == req.body.user.id) {
+                        users[i].username = req.body.user.username;
+                        users[i].email = req.body.user.email;
+                        users[i].permission = req.body.user.permission;
                     }
                 }
 

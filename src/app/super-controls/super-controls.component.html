@@ -1,12 +1,16 @@
-<p>super-controls works!</p>
+
 <div class="supercontrols-container">
-    <div *ngIf="applications.length > 0" class="application-list-container">
-        <h1>New Applications</h1>
-        <ul>
-            <li *ngFor="let a of applications">
-                <div>User: {{a.username}}<br>For Position: {{a.permission}}</div>
-                <button (click)="onApprove(a)">Approve</button>
-                <button (click)="onDisapprove(a)">Disapprove</button>
+    <h1>New Applications</h1>
+    <div class="user-list-container">
+        <h3>Make User admin permissions</h3>
+        <ul *ngFor="let u of users">
+            
+            <li *ngIf="u.permission != sadmin">  
+                <div>
+                    <p>Username: {{u.username}} Permission: {{u.permission}}</p>
+                    <button *ngIf="u.permission != gadmin" (click)="makeAdmin(u, gadmin)">Group Admin</button>
+                    <button (click)="makeAdmin(u, sadmin)">Super Admin</button>
+                </div>
             </li>
         </ul>
     </div>
