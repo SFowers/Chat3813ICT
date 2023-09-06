@@ -1,13 +1,80 @@
+.groups-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 li {
     list-style: none;
 }
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
 button {
-    background-color: #8fa4b3; /* Green */
+    background-color: #4f687a; /* Green */
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 12px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    border-radius: 5%;
+}
+button:hover {
+    cursor:pointer;
+    background-color: #80a7c4;
+    transition-duration: 0.3s;
+}
+.group-form {
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+.form-item{
+    display: flex;
+    align-self: center;
+}
+.form-item label {
+    display: flex;
+    align-self:center;
+}
+.group-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:flex-start;
+    flex-wrap: wrap;
+}
+.group-list-container div{
+    align-items: center;
+    border: #808f99;
+    border-style: solid;
+    border-radius: 5px;
+    background-color: #32434d;
+    padding: 20px;
+    min-width: 60rem;
+    max-width: 100rem;
+    padding: 2%;
+}
+.group-list {
+    display: inline-block;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.group-list li {
+    min-width: 5rem;
+}
+.group-list li button{
+    flex-direction: column;
+}
+.error-message {
+    color: red;
 }

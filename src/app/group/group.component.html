@@ -1,27 +1,30 @@
-<div class="group-container">
-    <h1>{{currentGroup.groupname}}</h1>
-    <div class="group-channels-container">
-        <h2>{{currentGroup.groupname}} Channels</h2>
-        <ul *ngFor="let c of currentGroup.channels">
-            <li ><button (click)="onSelect(c)">{{c}}</button></li>
-        </ul>
+<div class="group-container" *ngIf="admin">
+    <div class="create-channel">
+        <h3>Create new Channel</h3>
+        <input [(ngModel)]="cname" />
+        <button (click)="createChannel()">Create Channel</button>
+    </div>
+    <div class="channel-container">
+        <h1>{{currentGroup.groupname}}</h1>
+        <div class="group-channels-container">
+            <h2>{{currentGroup.groupname}} Channels</h2>
+            <ul *ngFor="let c of currentGroup.channels">
+                <li ><button (click)="onSelect(c)">{{c}}</button></li>
+            </ul>
+        </div>
     </div>
     <div class="gadmin-container" *ngIf="admin">
-        <div class="create-channel">
-            <h3>Create new Channel</h3>
-            <input [(ngModel)]="cname" />
-            <button (click)="createChannel()">Create Channel</button>
-        </div>
         <div class="gadmin-list">
             <h3>{{currentGroup.groupname}} Admins</h3>
             <ul>
-                <li *ngFor="let a of currentGroup.admins">{{a}}</li>
+                <li class="list-item" *ngFor="let a of currentGroup.admins">{{a}}</li>
             </ul>
         </div>
         <div class="gadmin-list">
             <h3>{{currentGroup.groupname}} Users</h3>
             <ul *ngFor="let u of currentGroup.users">
-                <li *ngIf="!currentGroup.admins.includes(u)">{{u}}
+                <li class="list-item" *ngIf="!currentGroup.admins.includes(u)">
+                    <h3>{{u}}</h3>
                     <button (click)="addAdmin(u)">Add as Admin</button>
                 </li>
             </ul>
@@ -29,7 +32,8 @@
         <div class="gadmin-list">
             <h3>{{currentGroup.groupname}} Applications</h3>
             <ul *ngFor="let app of currentGroup.applied">
-                <li >{{app}}
+                <li class="list-item">
+                    <h3>{{app}}</h3>
                     <button (click)="addApplicant(app)">Add Applicant</button>
                 </li>
             </ul>

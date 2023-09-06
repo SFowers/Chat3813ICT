@@ -1,5 +1,5 @@
 <div class="card">
-    <h4 class="card-header">Login</h4>
+    <h1 class="card-header">Login</h1>
     <div class="card-body" *ngIf="!loggedin">
         <form (submit)="signin($event)">
             <div class="form-item">
@@ -19,8 +19,7 @@
         <h3>You are already logged in.</h3>
         <a href="/home">Home</a>
     </div>
-    <div class="card-body">
-        <h2>Sign Up</h2>
+    <div class="nav-item">
         <a href="/signup">Signup</a>
     </div>
 </div>
