@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
-
+const MongoClient = require('mongodb').MongoClient;
 const cors = require('cors');
 
 const PORT = 3000;
@@ -21,6 +21,30 @@ const io = require('socket.io')(http, {
 
 const sockets = require('./sockets.js');
 const server = require('./listen.js');
+
+const mongoURL = 'mongodb://127.0.0.1:27017/';
+const dbName = 'mydb';
+
+MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
+    if (err) {
+        console.error('Error connecting to MongoDB:', err);
+        return;
+    }
+
+    console.log('Connected to MongoDB server');
+
+    const db = client.db(dbName);
+
+    //require('./routes/add.js')(app, db);
+    //require('./routes/read.js')(app, db);
+    //require('./routes/update.js')(app, db, ObjectID);
+    //require('./routes/remove.js')(app, db, ObjectID);
+
+    app.listen(port, () => {
+        console.log('App is listening on port ' + port);
+    });
+});
+
 
 require('./routes/api-login.js')(app, path, fs);
 require('./routes/api-signup.js')(app, path, fs);
