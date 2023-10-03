@@ -1,59 +1,117 @@
+/* Account Page Styles */
 .account-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-}
-.account-container div {
-    padding:1%;
-}
-li {
-    list-style: none;
-}
-input {
+    padding: 20px;
+  }
+  
+  .details {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  p {
+    font-size: 18px;
+  }
+  
+  /* Form Styles */
+  .account-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
+    max-width: 400px; /* Adjust as needed */
+    margin: 20px 0;
+  }
+  
+  .form-item {
+    margin: 10px 0;
+    width: 100%;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
-}
-button {
-    background-color: #4f687a; /* Green */
+    font-size: 16px;
+  }
+  
+  /* Buttons Styles */
+  button.btn-primary {
+    background-color: #4f687a;
     border: none;
     color: white;
-    padding: 12px 15px;
+    padding: 12px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    border-radius: 5%;
-}
-button:hover {
-    cursor:pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button.btn-primary:hover {
     background-color: #80a7c4;
-    transition-duration: 0.3s;
-}
-.account-form {
-    display:flex;
-    justify-content: center;
-    flex-direction: column;
-    
-    
-}
-.form-item{
-    display: flex;
-    align-self: center;
-    justify-content: center;
-}
-.form-item label {
-    display: flex;
-    align-self:center;
-}
-.details {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
+  }
+  
+  /* Error Message Styles */
+  .error-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .error-message {
+    font-size: 18px;
+    color: red;
+  }
+  
+  /* Delete Account Button Styles */
+  .delete-account-button {
+    background-color: #ff6347; /* Tomato */
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .delete-account-button:hover {
+    background-color: #ff4839; /* Slightly darker red */
+  }
+  
+  /* Super Admin Controls Button Styles */
+  .super-admin-button {
+    background-color: #ffae42; /* Orange */
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .super-admin-button:hover {
+    background-color: #ff9b00; /* Slightly darker orange */
+  }
+  

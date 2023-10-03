@@ -1,80 +1,117 @@
+/* Groups Page Styles */
 .groups-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-}
-li {
-    list-style: none;
-}
-input {
+  }
+  
+  /* Form Styles */
+  .group-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
-button {
-    background-color: #4f687a; /* Green */
+    max-width: 400px; /* Adjust as needed */
+    margin: 20px 0;
+  }
+  
+  .form-item {
+    margin: 10px 0;
+    width: 100%;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  /* Buttons Styles */
+  button.btn-primary {
+    background-color: #4f687a;
     border: none;
     color: white;
-    padding: 12px 15px;
+    padding: 12px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    border-radius: 5%;
-}
-button:hover {
-    cursor:pointer;
-    background-color: #80a7c4;
-    transition-duration: 0.3s;
-}
-.group-form {
-    display:flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-}
-.form-item{
-    display: flex;
-    align-self: center;
-}
-.form-item label {
-    display: flex;
-    align-self:center;
-}
-.group-list-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items:flex-start;
-    flex-wrap: wrap;
-}
-.group-list-container div{
-    align-items: center;
-    border: #808f99;
-    border-style: solid;
+    font-size: 18px;
     border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button.btn-primary:hover {
+    background-color: #80a7c4;
+  }
+  
+  /* Group List Styles */
+  .group-list-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed */
+    margin-top: 20px;
+  }
+  
+  .group-list {
+    flex: 1;
     background-color: #32434d;
+    border: 1px solid #808f99;
+    border-radius: 5px;
     padding: 20px;
-    min-width: 60rem;
-    max-width: 100rem;
-    padding: 2%;
-}
-.group-list {
-    display: inline-block;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-.group-list li {
-    min-width: 5rem;
-}
-.group-list li button{
-    flex-direction: column;
-}
-.error-message {
+    min-width: 400px; /* Adjust as needed */
+    max-width: 600px; /* Adjust as needed */
+  }
+  
+  .group-list h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .group-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .group-list li {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+/* Group Button Styles */
+.group-button {
+    background-color: #4f687a;
+    border: none;
+    color: white;
+    width: 200px; /* Adjust the width as needed */
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncate text with ellipsis */
+    transition: background-color 0.3s ease;
+  }
+  
+  .group-button:hover {
+    background-color: #80a7c4;
+  }
+  
+  
+  /* Error Message Styles */
+  .error-message {
     color: red;
-}
+  }
+  

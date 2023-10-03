@@ -25,10 +25,10 @@
     </div>
     <br><br>
     <div>
-        <button (click)="deleteAccount($event)">DELETE ACCOUNT {{currentUser.username}}</button>
+        <button class="delete-account-button"(click)="deleteAccount($event)">DELETE ACCOUNT {{currentUser.username}}</button>
     </div>
     <br><br>
     <div *ngIf="currentUser.permission == superadmin">
-        <button (click)="superControls()">Go to Super Admin Controls</button>
+        <button class="super-admin-button" (click)="superControls()">Go to Super Admin Controls</button>
     </div>
 </div>

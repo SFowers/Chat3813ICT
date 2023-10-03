@@ -1,34 +1,35 @@
 <div class="groups-container">
     <div *ngIf="currentUser.permission==gadmin || currentUser.permission==sadmin">
-        <h1>Create a new Group</h1>
-        <form class="group-form" (submit)="createGroup($event)">
-            <div class="form-item">
-                <input type="text" [(ngModel)]="groupname" name="groupname" class="form-input" placeholder="Group Name"/>
-            </div>
-            <div class="form-item">
-                <button type="button" class="btn btn-primary" type="submit">Create Group</button>
-            </div>
-        </form>
-        <div class="error-message" *ngIf="error">
-            {{error}}
+      <h1>Create a new Group</h1>
+      <form class="group-form" (submit)="createGroup($event)">
+        <div class="form-item">
+          <input type="text" [(ngModel)]="groupname" name="groupname" class="form-input" placeholder="Group Name" />
         </div>
-    </div>
-    <div *ngIf="myGroups.length > 0" class="group-list-container">
-        <div>
-            <h1>My Groups</h1>
-            <ul class="group-list" *ngFor="let g of myGroups">
-                <li class="gl-item"><button class="group-button" (click)="onSelect(g)">{{g.groupname}}</button></li>
-            </ul>
+        <div class="form-item">
+          <button type="button" class="btn btn-primary" type="submit">Create Group</button>
         </div>
+      </form>
+      <div class="error-message" *ngIf="error">
+        {{error}}
+      </div>
     </div>
-    <div>
-        <h1>Find More Groups</h1>
-        <ul class="group-list" *ngFor="let g of allGroups" >
-            <li class="gl-item" *ngIf="!g.users.includes(currentUser.username)">
-                <button class="group-button" (click)="onSelect(g)">{{g.groupname}} 
-                    <div *ngIf="g.applied.includes(currentUser.username)">- Applied</div>
-                </button>
-            </li>
+    <div class="group-list-container">
+      <div class="group-list">
+        <h1>My Groups</h1>
+        <ul>
+          <li *ngFor="let g of myGroups" class="gl-item">
+            <button class="group-button" (click)="onSelect(g)">{{g.groupname}}</button>
+          </li>
         </ul>
+      </div>
+      <div class="group-list">
+        <h1>Find More Groups</h1>
+        <ul *ngFor="let g of allGroups">
+          <li class="gl-item" *ngIf="!g.users.includes(currentUser.username)">
+            <button class="group-button" (click)="onSelect(g)">{{g.groupname}} <div *ngIf="g.applied.includes(currentUser.username)">- Applied</div></button>
+          </li>
+        </ul>
+      </div>
     </div>
-</div>
+  </div>
+  
