@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { User } from './user';
 import { Group } from './group';
 import { GroupService } from './services/group.service';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,8 @@ export class AppComponent {
   myGroups:Group[] = [];
   allGroups:Group[] = [];
 
+  private userStatusSubscription: Subscription = new Subscription();
+
   constructor(private auth:AuthService,
               private groupService:GroupService, 
               private router:Router) {}
@@ -26,6 +29,9 @@ export class AppComponent {
     if(this.currentUser) {
       this.getAllGroups();
     }
+    this.userStatusSubscription = interval(5000).subscribe(() => {
+      this.checkUserStatus();
+    });
   }
 
   getAllGroups() {
@@ -68,6 +74,24 @@ export class AppComponent {
 
   logOut(event:any) {
     this.auth.logout(event);
+    this.groupService.removeCurrentGroup(event);
+    this.currentUser = new User();
+    console.log(this.currentUser);
     this.router.navigate(['/login']);
+  }
+  ngOnDestroy() {
+    // Unsubscribe from the observable to prevent memory leaks
+    this.userStatusSubscription.unsubscribe();
+  }
+
+  checkUserStatus() {
+    // Check the user's login status here using this.auth.getCurrentUser()
+    const isLoggedIn = !!this.auth.getCurrentUser(); // Modify this based on your authentication logic
+
+    if (!isLoggedIn) {
+      // User is not logged in, perform any necessary actions (e.g., redirect to login)
+      this.currentUser = new User(); // Reset the user data
+      this.router.navigate(['/login']);
+    }
   }
 }

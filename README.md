@@ -17,8 +17,9 @@ User which consists of:
 - username:string
 - permission:string
 - pwd:string
-  There are the basic details of a user profile. Use email or username to login, and the permission grants you access depending on if you are a 'user', 'group admin' or a 'super admin'.
-  There was a recommended structure for User which i split into Group which i felt i could conceptualise it easier with this.
+
+There are the basic details of a user profile. Use email or username to login, and the permission grants you access depending on if you are a 'user', 'group admin' or a 'super admin'.
+There was a recommended structure for User which i split into Group which i felt i could conceptualise it easier with this.
 
 Group consists of:
 
@@ -28,11 +29,12 @@ Group consists of:
 - users:string[]
 - applied:string[]
 - channels:string[]
-  ID and groupname are unique identifiers for each group.
-  The admin array holds which users are admins in each group.
-  The user array holds each user of the group.
-  The applied array holds users which have to be approved by an admin to join the group.
-  The channels array which holds the different chat channels of the group.
+
+ID and groupname are unique identifiers for each group.
+The admin array holds which users are admins in each group.
+The user array holds each user of the group.
+The applied array holds users which have to be approved by an admin to join the group.
+The channels array which holds the different chat channels of the group.
 
 A group admin or a super admin can create a group and delete a group.
 An admin of the group must approve of which users are allowed access to the group.

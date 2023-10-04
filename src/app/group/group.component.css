@@ -17,23 +17,150 @@ input {
     box-sizing: border-box;
 }
 button {
-    background-color: #4f687a; /* Green */
+    background-color: #4f687a;
     border: none;
     color: white;
-    padding: 12px 15px;
+    width: 200px;
+    padding: 10px;
+    margin: 2px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: block;
     font-size: 16px;
-    border-radius: 5%;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
 }
 button:hover {
     cursor:pointer;
     background-color: #80a7c4;
     transition-duration: 0.3s;
 }
-.list-item {
+.admin-item {
+    background-color: #ffae42;
+    border: none;
+    color: black;
+    width: 100px;
+    padding: 10px;
+    margin: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
+}
+.channel-container {
+    background-color: #32434d;
+    border: 1px solid #808f99;
+    border-radius: 5px;
+    padding: 20px;
     display: flex;
-    flex-direction: row;
+    width: 80%;
     justify-content: center;
+    flex-direction: column;
+}
+.group-channels-container {
+    
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.group-channels-container ul {
+    margin: 0;
+    padding: 0;
+}
+.channel-button {
+    background-color: #4f687a;
+    border: none;
+    color: white;
+    width: 100px; /* Adjust the width as needed */
+    padding: 5px; /* Reduced padding */
+    margin: 2px; /* Reduced margin */
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncate text with ellipsis */
+    transition: background-color 0.3s ease;
+}
+.admin-list {
+    background-color: #32434d;
+    border: 1px solid #808f99;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    flex-direction: column;
+}
+.gadmin-container {
+    background-color: #262e36;
+    border: 1px solid #808f99;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 50px;
+    padding: 10px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.create-channel {
+    width: 50%;
+}
+.gadmin-list {
+    background-color: #32434d;
+    border: 1px solid #808f99;
+    border-radius: 5px;
+    display: flex;
+    width: 100%;
+    margin: 10px;
+    justify-content: center;
+    flex-direction: column;
+}
+.gadmin-list h3 {
+    margin: 20px;
+}
+.gadmin-list h4 {
+    margin: 20px;
+}
+.gadmin-list ul {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.delete-group {
+    width: 50%;
+    margin: 20px;
+    padding: 20px;
+}
+.delete-group-button {
+    background-color: #ff6347; /* Tomato */
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+.delete-group-button:hover {
+    background-color: #ff4839; /* Slightly darker red */
 }
