@@ -13,7 +13,7 @@ const routes: Routes = [{path: 'login', component: LoginComponent},
                         {path: 'signup', component: SignupComponent},
                         {path: 'chat', component: ChatComponent},
                         {path: 'groups', component: GroupsComponent},
-                        {path: 'group', component: GroupComponent},
+                        {path: 'group/:groupname', component: GroupComponent},
                         {path: 'super', component: SuperControlsComponent}];
 
 @NgModule({

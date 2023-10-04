@@ -10,6 +10,7 @@ const SERVER_URL = 'http://localhost:3000';
 })
 export class SocketsService {
   private socket: any;
+  private socketid: any;
   messages = signal<Message[]>([]);
 
   constructor() {}
@@ -25,7 +26,7 @@ export class SocketsService {
     });
   }
 
-  public send(message: string): void {
+  public sendMessage(message: string): void {
     this.socket.emit('message', message);
   }
 }

@@ -57,14 +57,14 @@ export class GroupsComponent {
     let inGroup = false;
     for(let j = 0; j < group.users.length; j++) {
       if(this.currentUser.username == group.users[j]) {
-        console.log("in group");
+        //console.log("in group");
         inGroup = true;
       }
     }
     if(inGroup) {
       //alert("in This group");
       this.groupService.setCurrentGroup(group);
-      this.router.navigate(['/group']);
+      this.router.navigate(['/group', group.groupname]);
     } else {
       if(this.currentUser.permission == this.sadmin) {
         this.superJoinGroup(group);

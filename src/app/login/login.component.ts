@@ -35,7 +35,7 @@ export class LoginComponent {
             this.newuser = new User(data.username, data.email, '', data.permission, data.id);
             this.auth.setCurrentUser(this.newuser);
             console.log(this.auth.getCurrentUser);
-            this.router.navigate(['/account']);
+            this.router.navigate(['/groups']);
           } else {
             console.log("There is a problem with the credentials" + JSON.stringify(data));
           }   

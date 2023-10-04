@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
-//const MongoClient = require('mongodb').MongoClient;
+const {MongoClient} = require('mongodb');
 const cors = require('cors');
 
 const PORT = 3000;
+const ANGULAR_URL = "http://localhost:4200";
+const MONGODB_URL = "mongodb://127.0.0.1:27017";
 
 const path = require('path');
 var fs = require('fs');
@@ -14,7 +16,7 @@ app.use(express.json());
 
 const io = require('socket.io')(http, {
     cors: {
-        origin: "http://localhost:4200",
+        origin: ANGULAR_URL,
         methods: ["GET", "POST"],
     }
 });
@@ -22,8 +24,22 @@ const io = require('socket.io')(http, {
 const sockets = require('./sockets.js');
 const server = require('./listen.js');
 
-const mongoURL = 'mongodb://127.0.0.1:27017/';
-const dbName = 'mydb';
+const uri = MONGODB_URL;
+const client = new MongoClient(uri);
+
+async function main() {
+    try {
+        await client.connect();
+        let db = client.db("Chat3813");
+        console.log("DB Connected" + db);
+        //users = await db.collection("users").find({}).toArray();
+        //users = await db.collection("users");
+        //users.insertOne({user: "Sean", groups: ['g1']});
+
+    } catch(e) {
+        console.log(e);
+    }
+}main().catch(console.error);
 
 /*
 MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {

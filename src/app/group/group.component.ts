@@ -3,7 +3,7 @@ import { GroupService } from '../services/group.service';
 import { AuthService } from '../services/auth.service';
 import { Group } from '../group';
 import { User } from '../user';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-group',
@@ -21,15 +21,21 @@ export class GroupComponent {
   admin:Boolean = false;
   cname:string = '';
 
-  constructor(private groupService:GroupService, private auth:AuthService, private router:Router) {}
+  constructor(private groupService:GroupService, 
+              private auth:AuthService, 
+              private router:Router,
+              private actRoute:ActivatedRoute) {}
 
   ngOnInit() {
-    this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
-    this.currentGroup = JSON.parse(this.groupService.getCurrentGroup() || '{}');
-    if(!this.currentGroup.groupname) {
-      this.router.navigateByUrl('/groups');
-    }
-    this.checkGroupAdmin();
+    this.actRoute.paramMap.subscribe(params => {
+      const groupname = params.get('groupname');
+      this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
+      this.currentGroup = JSON.parse(this.groupService.getCurrentGroup() || '{}');
+      if(this.currentGroup.groupname != groupname) {
+        this.router.navigateByUrl('/groups');
+      }
+      this.checkGroupAdmin();
+    })
   }
 
   checkGroupAdmin() {
@@ -86,4 +92,15 @@ export class GroupComponent {
     });
     this.router.navigate(['/groups']);
   }
+
+  reloadComponent(self:boolean,urlToNavigateTo ?:string){
+    //skipLocationChange:true means dont update the url to / when navigating
+   console.log("Current route I am on:",this.router.url);
+   const url=self ? this.router.url :urlToNavigateTo;
+   this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{
+     this.router.navigate([`/${url}`]).then(()=>{
+       console.log(`After navigation I am on:${this.router.url}`)
+     })
+   })
+ }
 }

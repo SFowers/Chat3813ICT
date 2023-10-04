@@ -1,16 +1,30 @@
-<nav>  
+<div class="container">
+<nav class="sidebar">  
   <div class="navbar">
     <ul class="nav-container">
       <li><h1>Chat3813</h1></li>
-      <li class="nav-item"><a href="/login">Login</a></li>
-      <li class="nav-item"><a href="/signup">Signup</a></li>
-      <li class="nav-item"><a href="/account">Account</a></li>
-      <li class="nav-item"><a href="/groups">Groups</a></li>
-      <li class="nav-item"><a href="/chat">Chat</a></li>
-      <li class="nav-item"><button id="Logout" (click)="logOut($event)">Logout</button></li>
+      <li class="nav-item" *ngIf="!currentUser"><a href="/login">Login</a></li>
+      <li class="nav-item" *ngIf="!currentUser"><a href="/signup">Signup</a></li>
+      <li class="nav-item" *ngIf="currentUser"><a href="/account">Account</a></li>
+      <li class="nav-item" *ngIf="currentUser"><a href="/groups">Groups</a></li>
+      <!--<li class="nav-item"><button id="Logout" (click)="logOut($event)">Logout</button></li>-->
     </ul>
+    <div class="nav-container" *ngIf="currentUser">
+      <ul class="group-list">
+        <h1>My Groups</h1>
+        <li *ngFor="let g of myGroups" class="gl-item">
+          <button class="group-button" (click)="onSelect(g)">{{g.groupname}}</button>
+        </li>
+      </ul>
+    </div>
+    <div class="logout-container">
+      <ul class="nav-container" *ngIf="currentUser">
+        <li class="nav-item"><button id="Logout" (click)="logOut($event)">Logout</button></li>
+      </ul>
+    </div>
   </div>
 </nav>
 <div class="content-container">
   <router-outlet></router-outlet>
+</div>
 </div>
