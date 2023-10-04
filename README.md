@@ -19,7 +19,9 @@ User which consists of:
 - pwd:string
   There are the basic details of a user profile. Use email or username to login, and the permission grants you access depending on if you are a 'user', 'group admin' or a 'super admin'.
   There was a recommended structure for User which i split into Group which i felt i could conceptualise it easier with this.
-  Group consists of:
+
+Group consists of:
+
 - id:number
 - groupname:string
 - admins:string[]
