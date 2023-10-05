@@ -19,6 +19,7 @@ export class GroupsComponent {
   sadmin:string = 'super admin';
   groupname:string = '';
   error:string = '';
+  showCreate:boolean = false;
 
   constructor(private auth:AuthService, private groupService:GroupService, private router:Router) {}
 
@@ -28,6 +29,7 @@ export class GroupsComponent {
       this.router.navigate(['/login']);
     }
     this.getAllGroups();
+    this.groupname = '';
   }
 
   getAllGroups() {
@@ -51,6 +53,10 @@ export class GroupsComponent {
         }
       }
     }
+  }
+
+  showCreateGroup() {
+    this.showCreate = !this.showCreate;
   }
 
   onSelect(group:Group) {

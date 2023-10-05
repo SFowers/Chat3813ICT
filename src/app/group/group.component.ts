@@ -20,6 +20,10 @@ export class GroupComponent {
   applied = [];
   admin:Boolean = false;
   cname:string = '';
+  sadmins:Boolean = false;
+  ssettings:Boolean = false;
+  susers:Boolean = false;
+  sapplications:Boolean = false;
 
   constructor(private groupService:GroupService, 
               private auth:AuthService, 
@@ -44,6 +48,18 @@ export class GroupComponent {
         this.admin = true;
       }
     }
+  }
+  showAdmins() {
+    return this.sadmins = !this.sadmins;
+  }
+  showSettings() {
+    return this.ssettings = !this.ssettings;
+  }
+  showUsers() {
+    return this.susers = !this.susers;
+  }
+  showApplications() {
+    return this.sapplications = !this.sapplications;
   }
 
   createChannel() {

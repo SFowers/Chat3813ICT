@@ -34,6 +34,7 @@
 .nav-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   list-style-type: none;
 }
@@ -98,7 +99,13 @@ ul {
 h1 {
   text-align: center;
 }
-
+h2 {
+  text-align: center;
+}
+.group-list {
+  max-height: 500px;
+  overflow: auto;
+}
 .group-button {
   background-color: #1f2831;
   color: #96a1ab;

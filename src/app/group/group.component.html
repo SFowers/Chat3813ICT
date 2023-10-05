@@ -8,40 +8,44 @@
             </ul>
         </div>
     </div>
-    <div class="admin-list">
+    <button class="show-settings-button" (click)="showAdmins()">Show Admins</button>
+    <div class="admin-list" *ngIf="sadmins">
         <h3>{{currentGroup.groupname}} Admins</h3>
         <ul>
             <li class="admin-item" *ngFor="let a of currentGroup.admins">{{a}}</li>
         </ul>
     </div>
-    <div class="gadmin-container" *ngIf="admin">
-        <div class="create-channel">
-            <h3>Create new Channel</h3>
-            <input [(ngModel)]="cname" />
-            <button (click)="createChannel()">Create Channel</button>
-        </div>
-        
-        <div class="gadmin-list">
-            <h3>Users</h3>
-            <ul *ngFor="let u of currentGroup.users">
-                <li *ngIf="!currentGroup.admins.includes(u)">
-                    <button (click)="addAdmin(u)">{{u}} - Add as Admin</button>
-                </li>
-            </ul>
-        </div>
-        <div class="gadmin-list">
-            <h3>Applications</h3>
-            <h4 *ngIf="currentGroup.applied">No new applications</h4>
-            <ul *ngFor="let app of currentGroup.applied">
-                <li class="list-item">
-                    <button (click)="addApplicant(app)">Add {{app}}</button>
-                    <button (click)="addApplicant(app)">Remove {{app}}</button>
-                </li>
-            </ul>
-        </div>
-        <div class="delete-group">
-            <h3>Delete {{currentGroup.groupname}}</h3>
-            <button class="delete-group-button" (click)="deleteGroup($event)">DELETE GROUP</button>
+    <div class="gadmin-settings" *ngIf="admin">
+        <button class="show-settings-button" (click)="showSettings()">Show Admin Settings</button>
+        <div class="gadmin-container" *ngIf="ssettings">
+            <div class="create-channel">
+                <h3>Create new Channel</h3>
+                <input [(ngModel)]="cname" />
+                <button (click)="createChannel()">Create Channel</button>
+            </div>
+            <button class="show-settings-button" (click)="showUsers()">Show Users</button>
+            <div class="gadmin-list" *ngIf="susers">
+                <h3>Users</h3>
+                <ul class="user-list" *ngFor="let u of currentGroup.users">
+                    <li class="user-button" *ngIf="!currentGroup.admins.includes(u)" (click)="addAdmin(u)">{{u}} - Add as Admin</li>
+                    <li class="admin-user-button" *ngIf="currentGroup.admins.includes(u)">{{u}}</li>
+                </ul>
+            </div>
+            <button class="show-settings-button" (click)="showApplications()">Show Applications</button>
+            <div class="gadmin-list" *ngIf="sapplications">
+                <h3>Applications</h3>
+                <h4 *ngIf="currentGroup.applied">No new applications</h4>
+                <ul *ngFor="let app of currentGroup.applied">
+                    <li class="list-item">
+                        <button class="user-button" (click)="addApplicant(app)">Add {{app}}</button>
+                        <button class="user-button" (click)="addApplicant(app)">Remove {{app}}</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="delete-group">
+                <h3>Delete {{currentGroup.groupname}}</h3>
+                <button class="delete-group-button" (click)="deleteGroup($event)">DELETE GROUP</button>
+            </div>
         </div>
     </div>
 </div>

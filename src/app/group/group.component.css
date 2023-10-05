@@ -5,10 +5,7 @@
     align-items: center;
 }
 li {
-    display: flex;
     list-style: none;
-    flex-direction: column;
-    justify-content: flex-start;
 }
 input {
     width: 100%;
@@ -39,23 +36,6 @@ button:hover {
     background-color: #80a7c4;
     transition-duration: 0.3s;
 }
-.admin-item {
-    background-color: #ffae42;
-    border: none;
-    color: black;
-    width: 100px;
-    padding: 10px;
-    margin: 2px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-    border-radius: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: background-color 0.3s ease;
-}
 .channel-container {
     background-color: #32434d;
     border: 1px solid #808f99;
@@ -81,9 +61,9 @@ button:hover {
     background-color: #4f687a;
     border: none;
     color: white;
-    width: 100px; /* Adjust the width as needed */
-    padding: 5px; /* Reduced padding */
-    margin: 2px; /* Reduced margin */
+    width: 100px;
+    padding: 5px;
+    margin: 2px;
     text-align: center;
     text-decoration: none;
     display: block;
@@ -92,7 +72,7 @@ button:hover {
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Truncate text with ellipsis */
+    text-overflow: ellipsis;
     transition: background-color 0.3s ease;
 }
 .admin-list {
@@ -105,6 +85,47 @@ button:hover {
     justify-content: center;
     flex-direction: column;
 }
+.admin-list ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.admin-item {
+    background-color: #ffae42;
+    border: none;
+    color: black;
+    width: 100px;
+    padding: 10px;
+    margin: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
+}
+.gadmin-settings {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 90%;
+}
+.show-settings-button {
+    background-color: transparent;
+    color:darkgrey;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.show-settings-button:hover {
+    color:white;
+    transition: 0.3s;
+  }
 .gadmin-container {
     background-color: #262e36;
     border: 1px solid #808f99;
@@ -125,9 +146,9 @@ button:hover {
     background-color: #32434d;
     border: 1px solid #808f99;
     border-radius: 5px;
+    padding: 20px;
     display: flex;
-    width: 100%;
-    margin: 10px;
+    width: 80%;
     justify-content: center;
     flex-direction: column;
 }
@@ -137,11 +158,49 @@ button:hover {
 .gadmin-list h4 {
     margin: 20px;
 }
-.gadmin-list ul {
+.user-list{
     display: flex;
-    justify-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.user-button {
+    background-color: #4f687a;
+    border: none;
+    color: black;
+    width: 100px;
+    padding: 10px;
+    margin: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
+}
+.user-button:hover {
+    cursor:pointer;
+    background-color: #80a7c4;
+    transition-duration: 0.3s;
+}
+.admin-user-button {
+    background-color: #ffae42;
+    border: none;
+    color: black;
+    width: 100px;
+    padding: 10px;
+    margin: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
 }
 .delete-group {
     width: 50%;

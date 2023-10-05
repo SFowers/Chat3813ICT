@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { User } from './user';
 import { Group } from './group';
 import { GroupService } from './services/group.service';
-import { Subscription, interval } from 'rxjs';
+//import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent {
   myGroups:Group[] = [];
   allGroups:Group[] = [];
 
-  private userStatusSubscription: Subscription = new Subscription();
+  //private userStatusSubscription: Subscription = new Subscription();
 
   constructor(private auth:AuthService,
               private groupService:GroupService, 
@@ -29,9 +29,19 @@ export class AppComponent {
     if(this.currentUser) {
       this.getAllGroups();
     }
-    this.userStatusSubscription = interval(5000).subscribe(() => {
-      this.checkUserStatus();
-    });
+    //this.userStatusSubscription = interval(5000).subscribe(() => {
+    //  this.checkUserStatus();
+    //});
+  }
+  login() {
+    this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
+    if(this.currentUser) {
+      this.getAllGroups();
+    }
+  }
+  checkUser() {
+    //console.log(Object.keys(this.currentUser).length === 0);
+    return Object.keys(this.currentUser).length === 0;
   }
 
   getAllGroups() {
@@ -81,7 +91,7 @@ export class AppComponent {
   }
   ngOnDestroy() {
     // Unsubscribe from the observable to prevent memory leaks
-    this.userStatusSubscription.unsubscribe();
+    //this.userStatusSubscription.unsubscribe();
   }
 
   checkUserStatus() {

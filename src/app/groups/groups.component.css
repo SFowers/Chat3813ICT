@@ -3,39 +3,39 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+}
   
-  /* Form Styles */
-  .group-form {
+/* Form Styles */
+.group-form {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
     max-width: 400px; /* Adjust as needed */
     margin: 20px 0;
-  }
+}
   
-  .form-item {
+.form-item {
     margin: 10px 0;
     width: 100%;
-  }
+}
   
-  .form-label {
+.form-label {
     display: block;
     margin-bottom: 5px;
     font-size: 18px;
-  }
+}
   
-  .form-input {
+.form-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-  }
+}
   
-  /* Buttons Styles */
-  button.btn-primary {
+/* Buttons Styles */
+button.btn-primary {
     background-color: #4f687a;
     border: none;
     color: white;
@@ -46,52 +46,58 @@
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
-  }
+}
   
-  button.btn-primary:hover {
+button.btn-primary:hover {
     background-color: #80a7c4;
-  }
+}
   
-  /* Group List Styles */
-  .group-list-container {
+/* Group List Styles */
+.group-list-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px; /* Adjust as needed */
+    max-width: 1000px;
     margin-top: 20px;
-  }
+}
   
-  .group-list {
+.group-list {
     flex: 1;
     background-color: #32434d;
+    flex-wrap: wrap;
     border: 1px solid #808f99;
     border-radius: 5px;
     padding: 20px;
-    min-width: 400px; /* Adjust as needed */
-    max-width: 600px; /* Adjust as needed */
-  }
+    max-width: 600px;
+    max-height: 600px;
+}
   
-  .group-list h1 {
+.group-list h1 {
     font-size: 24px;
     margin-bottom: 10px;
-  }
+}
   
-  .group-list ul {
+.group-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     list-style-type: none;
     padding: 0;
-  }
+    max-height: 500px;
+    overflow: auto;
+}
   
-  .group-list li {
-    display: block;
-    margin-bottom: 10px;
-  }
+.gl-item {
+  margin: 5px;
+}
   
 /* Group Button Styles */
 .group-button {
     background-color: #4f687a;
     border: none;
     color: white;
-    width: 200px; /* Adjust the width as needed */
+    width: 200px;
+    max-width: 200px;
     padding: 10px;
     text-align: center;
     text-decoration: none;
@@ -101,17 +107,83 @@
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Truncate text with ellipsis */
+    text-overflow: ellipsis;
     transition: background-color 0.3s ease;
   }
   
   .group-button:hover {
     background-color: #80a7c4;
   }
-  
+  .group-applied-button {
+    background-color: #ad3d11;
+    border: none;
+    color: white;
+    width: 200px;
+    max-width: 200px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
+  }
+  .group-applied-button:hover {
+    background-color: #d33e03;
+  }
+  .create-group-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .show-create-button {
+    background-color: #181e24;
+    border: none;
+    color: white;
+    width: 200px;
+    max-width: 200px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease;
+  }
+  .show-create-button:hover {
+    background-color: #80a7c4;
+    transition: 0.3s;
+  }
   
   /* Error Message Styles */
   .error-message {
     color: red;
+  }
+  .legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border-radius: 15%;
   }
   
