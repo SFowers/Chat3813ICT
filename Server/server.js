@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
-const http = require('http').Server(app);
-const {MongoClient} = require('mongodb');
+const { PeerServer } = require('peer');
+const { MongoClient } = require('mongodb');
 const cors = require('cors');
 
 const PORT = 3000;
+const PORT2 = 3001;
 const ANGULAR_URL = "http://localhost:4200";
 const MONGODB_URL = "mongodb://127.0.0.1:27017";
 
@@ -13,6 +14,14 @@ var fs = require('fs');
 
 app.use(cors());
 app.use(express.json());
+
+const sslOptions = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+};
+
+const http = require('http').Server(sslOptions, app);
+//const http = require('http').Server(app);
 
 const io = require('socket.io')(http, {
     cors: {
@@ -31,7 +40,7 @@ async function main() {
     try {
         await client.connect();
         let db = client.db("Chat3813");
-        console.log("DB Connected" + db);
+        console.log("DB Connected");
         //users = await db.collection("users").find({}).toArray();
         //users = await db.collection("users");
         //users.insertOne({user: "Sean", groups: ['g1']});
@@ -40,6 +49,28 @@ async function main() {
         console.log(e);
     }
 }main().catch(console.error);
+
+require('./routes/api-login.js')(app, path, fs);
+require('./routes/api-signup.js')(app, path, fs);
+require('./routes/api-updateuser.js')(app, path, fs);
+require('./routes/api-creategroup.js')(app, path, fs);
+require('./routes/api-getgroups.js')(app, fs);
+require('./routes/api-deletegroup.js')(app, fs);
+require('./routes/api-deleteuser.js')(app, fs);
+require('./routes/api-adminapplication.js')(app, fs);
+require('./routes/api-getapplications.js')(app, fs);
+require('./routes/api-updategroup.js')(app, fs);
+require('./routes/api-getusers.js')(app, fs);
+
+sockets.connect(io, PORT);
+server.listen(http, PORT);
+
+PeerServer({
+    port: PORT2,
+    path: '/',
+    ssl: sslOptions
+});
+console.log(`Starting SSL PeerServer at: ${PORT}`);
 
 /*
 MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
@@ -62,19 +93,3 @@ MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true 
     });
 });
 */
-
-require('./routes/api-login.js')(app, path, fs);
-require('./routes/api-signup.js')(app, path, fs);
-require('./routes/api-updateuser.js')(app, path, fs);
-require('./routes/api-creategroup.js')(app, path, fs);
-require('./routes/api-getgroups.js')(app, fs);
-require('./routes/api-deletegroup.js')(app, fs);
-require('./routes/api-deleteuser.js')(app, fs);
-require('./routes/api-adminapplication.js')(app, fs);
-require('./routes/api-getapplications.js')(app, fs);
-require('./routes/api-updategroup.js')(app, fs);
-require('./routes/api-getusers.js')(app, fs);
-
-sockets.connect(io, PORT);
-server.listen(http, PORT)
-

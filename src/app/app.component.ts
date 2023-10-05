@@ -26,17 +26,11 @@ export class AppComponent {
 
   ngOnInit() {
     this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
-    if(this.currentUser) {
+    console.log(this.currentUser);
+    if(!this.checkUser()) {
       this.getAllGroups();
-    }
-    //this.userStatusSubscription = interval(5000).subscribe(() => {
-    //  this.checkUserStatus();
-    //});
-  }
-  login() {
-    this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
-    if(this.currentUser) {
-      this.getAllGroups();
+    } else {
+      this.router.navigate(['/login']);
     }
   }
   checkUser() {
@@ -88,20 +82,5 @@ export class AppComponent {
     this.currentUser = new User();
     console.log(this.currentUser);
     this.router.navigate(['/login']);
-  }
-  ngOnDestroy() {
-    // Unsubscribe from the observable to prevent memory leaks
-    //this.userStatusSubscription.unsubscribe();
-  }
-
-  checkUserStatus() {
-    // Check the user's login status here using this.auth.getCurrentUser()
-    const isLoggedIn = !!this.auth.getCurrentUser(); // Modify this based on your authentication logic
-
-    if (!isLoggedIn) {
-      // User is not logged in, perform any necessary actions (e.g., redirect to login)
-      this.currentUser = new User(); // Reset the user data
-      this.router.navigate(['/login']);
-    }
   }
 }
