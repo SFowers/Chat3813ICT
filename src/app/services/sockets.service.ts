@@ -21,9 +21,10 @@ export class SocketsService {
   }
 
   getMessage() {
-    return new Observable(observer => {
-      this.socket.on('message', (data:string) => {observer.next(data)});
-    });
+    //return new Observable(observer => {
+    //  this.socket.on('message', (data:string) => {observer.next(data)});
+    //});
+    return this.obsFromIO(this.socket, 'message');
   }
 
   public sendMessage(message: string) {
@@ -49,5 +50,17 @@ export class SocketsService {
         observer.next(msgdata);
       })
     })
+  }
+  joinRoom(room:string) {
+    this.socket.emit("joinRoom", room);
+  }
+  leaveRoom(room:string) {
+    this.socket.emit("leaveRoom", room);
+  }
+  reqRoomList() {
+    this.socket.emit('roomList', 'list please');
+  }
+  getRoomList(next: (res:any) => void) {
+    this.socket.on('roomList', (res:any) => next(res));
   }
 }

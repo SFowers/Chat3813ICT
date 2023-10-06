@@ -38,7 +38,10 @@ const gumOptions = {
 })
 export class ChatComponent implements OnInit{
   messageContent:string = "";
-  messages:string[] = [];
+  messageOut:string = "";
+  messageIn:Message[] = <Message[]>[];
+  //messages:string[] = [];
+
   rooms = [];
   chosenRoom:string = "";
   roomNotice:string = "";
@@ -46,6 +49,8 @@ export class ChatComponent implements OnInit{
   isInRoom:boolean = false;
   newRoom:string = "";
   numOfUsers:number = 0;
+
+  currentUser = new User();
 
   ioConnection:any;
 
@@ -63,7 +68,11 @@ export class ChatComponent implements OnInit{
               private peerService:PeerService) {}
 
   ngOnInit() {
+    this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
+
     this.initIoConnection();
+    this.socket.reqRoomList();
+    this.socket.getRoomList((message:string) => { this.rooms = JSON.parse(message)});
     this.socket.getPeerID().subscribe((peerID: any) => {
       console.log('If a peer being ready to be called', 'Calling ${peerID}');
       if (peerID !== this.ownID) {
@@ -74,16 +83,33 @@ export class ChatComponent implements OnInit{
 
   private initIoConnection() {
     this.socket.initSocket();
+    this.socket.getMessage().subscribe((messages:any) => {
+      this.messageIn.push(messages);
+    })
+    /*
     this.ioConnection = this.socket.getMessage()
       .subscribe((message:any) => {
         this.messages.push(message);
       });
+    */
   }
-
+  joinRoom() {
+    console.log(this.chosenRoom);
+    this.socket.joinRoom(this.chosenRoom);
+    this.currentRoom = this.chosenRoom;
+    this.isInRoom = true;
+  }
+  leaveRoom() {
+    console.log(this.currentRoom);
+    this.socket.leaveRoom(this.currentRoom);
+    this.chosenRoom = "";
+    this.currentRoom = "";
+    this.isInRoom = false;
+  }
   chat() {
-    if(this.messageContent) {
-      this.socket.sendMessage(this.messageContent);
-      this.messageContent = "";
+    if(this.messageOut) {
+      this.socket.sendMessage(this.messageOut);
+      this.messageOut = "";
     } else {
       console.log("no message");
     }
