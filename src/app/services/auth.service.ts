@@ -44,4 +44,7 @@ export class AuthService {
   deleteUser(user:User) {
     return this.http.post<string>('http://localhost:3000/api/deleteuser', {user: user});
   }
+  imgupload(fd:any){
+    return this.http.post<any>('http://localhost:3000/api/upload', fd);
+  }
 }

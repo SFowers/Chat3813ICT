@@ -23,6 +23,17 @@
             {{error}}
         </h3>
     </div>
+    <div>
+        <h1> Avatar Upload</h1>
+        <form>
+            <div class="form-group">
+                <input type="file" class="form-control" (change)="onFileSelected($event)" name="uploadfile" id = "uploadfile" />
+            </div>
+            <div class="form-group mt-2">
+                <button class="btn btn-primary form-control" type="button" (click) ="onUpload()">Submit</button>
+            </div>
+        </form>
+    </div>
     <br><br>
     <div>
         <button class="delete-account-button"(click)="deleteAccount($event)">DELETE ACCOUNT {{currentUser.username}}</button>
