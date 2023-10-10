@@ -30,7 +30,7 @@ export class AppComponent {
     if(!this.checkUser()) {
       this.getAllGroups();
     } else {
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
     }
   }
   checkUser() {

@@ -1,55 +1,52 @@
-/* Account Page Styles */
 .account-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-  }
+}
   
-  .details {
+.details {
     text-align: center;
     margin-bottom: 20px;
-  }
+}
   
-  h1 {
+h1 {
     font-size: 24px;
-  }
+}
   
-  p {
+p {
     font-size: 18px;
-  }
+}
   
-  /* Form Styles */
-  .account-form {
+.account-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 400px; /* Adjust as needed */
+    max-width: 400px;
     margin: 20px 0;
-  }
+}
   
-  .form-item {
+.form-item {
     margin: 10px 0;
     width: 100%;
-  }
+}
   
-  .form-label {
+.form-label {
     display: block;
     margin-bottom: 5px;
     font-size: 18px;
-  }
+}
   
-  .form-input {
+.form-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-  }
+}
   
-  /* Buttons Styles */
-  button.btn-primary {
+button.btn-primary {
     background-color: #4f687a;
     border: none;
     color: white;
@@ -60,26 +57,24 @@
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
-  }
+}
   
-  button.btn-primary:hover {
+button.btn-primary:hover {
     background-color: #80a7c4;
-  }
+}
   
-  /* Error Message Styles */
-  .error-container {
+.error-container {
     text-align: center;
     margin-top: 20px;
-  }
+}
   
-  .error-message {
+.error-message {
     font-size: 18px;
     color: red;
-  }
+}
   
-  /* Delete Account Button Styles */
-  .delete-account-button {
-    background-color: #ff6347; /* Tomato */
+.delete-account-button {
+    background-color: #ff6347;
     border: none;
     color: white;
     padding: 12px 20px;
@@ -90,15 +85,14 @@
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
-  }
+}
   
-  .delete-account-button:hover {
-    background-color: #ff4839; /* Slightly darker red */
-  }
-  
-  /* Super Admin Controls Button Styles */
-  .super-admin-button {
-    background-color: #ffae42; /* Orange */
+.delete-account-button:hover {
+    background-color: #ff4839;
+}
+
+.super-admin-button {
+    background-color: #ffae42;
     border: none;
     color: white;
     padding: 12px 20px;
@@ -109,9 +103,17 @@
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
-  }
+}
   
-  .super-admin-button:hover {
-    background-color: #ff9b00; /* Slightly darker orange */
-  }
-  
+.super-admin-button:hover {
+    background-color: #ff9b00;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 15%;
+    object-fit: cover;
+    border: 2px solid #80a7c4;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}

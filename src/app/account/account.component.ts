@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from '../user';
 import { ApplicationsService } from '../services/applications.service';
-import { ToastrService } from 'ngx-toastr';
+//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-account',
@@ -24,17 +24,18 @@ export class AccountComponent {
   superadmin:string = 'super admin';
 
   selectedfile:any = null;
-  imagepath:String ="";
+  imagepath:String ="../../../Server/userimages/";
 
   constructor(private auth:AuthService, 
               private application:ApplicationsService, 
               private router:Router,
-              private toastr:ToastrService) {}
+              //private toastr:ToastrService
+              ) {}
 
   ngOnInit() {
     this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
-    if(this.currentUser == null) {
-      this.router.navigate(['/account']);
+    if(this.currentUser === null) {
+      this.router.navigate(['/login']);
     }
     this.username = this.currentUser.username;
     this.email = this.currentUser.email;
@@ -84,31 +85,35 @@ export class AccountComponent {
     this.auth.updateUser(this.currentUser).subscribe({
       next:
         (data)=>{
-          this.newuser = new User(data.username, data.email, '', data.permission, '', data.id);
+          this.newuser = new User(data.username, data.email, '', data.permission, data.avatar, data.id);
           this.auth.setCurrentUser(this.newuser);
         }
     })
   }
+
   onFileSelected(event:any){
+    console.log(event);
     this.selectedfile = event.target.files[0];
   }
 
   onUpload(){
+    
     const fd = new FormData();
     
     fd.append('image',this.selectedfile,this.selectedfile.name);
     
     this.auth.imgupload(fd).subscribe({
       next:(res)=>{  
+        console.log(res.data.filename);
         this.imagepath = res.data.filename;
-        this.currentUser.avatar  = res.data.filename; 
+        this.currentUser.avatar = res.data.filename; 
         this.auth.updateUser(this.currentUser).subscribe({
           next:
             (data)=>{ 
-              this.toastr.success('User Update', 'User data was updated.');
+              //this.toastr.success('User Update', 'User data was updated.');
+              this.auth.setCurrentUser(this.currentUser);
               }
         });
-        this.auth.setCurrentUser(this.currentUser);
       }
     });
   }

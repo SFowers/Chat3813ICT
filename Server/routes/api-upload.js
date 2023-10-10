@@ -1,6 +1,5 @@
 module.exports = function(app,formidable,path,fs){
     //Route to manage image file uploads
-    
     app.post('/api/upload', (req, res) => {
       const uploadFolder = path.join(__dirname, "../userimages");
       
@@ -17,6 +16,8 @@ module.exports = function(app,formidable,path,fs){
         //should check for duplicates.
         let oldpath = files.image[0].filepath;
         let newpath = form.options.uploadDir + "/" + files.image[0].originalFilename;
+
+        console.log(newpath);
         
         fs.rename(oldpath, newpath, function (err) {
           //if an error occurs send message to client
@@ -39,4 +40,11 @@ module.exports = function(app,formidable,path,fs){
         });
        });
     });
+    /*
+    app.post('/api/upload', (req, res) => {
+      var form = new formidable.IncomingForm(( __dirname: "./userimages"));
+      form.keepExtensions = true;
+    })
+    */
 }
+

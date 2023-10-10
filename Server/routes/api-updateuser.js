@@ -19,17 +19,20 @@ module.exports = function (app, path, fs) {
                 user.email = '';
                 user.permission = '';
                 user.pwd = '';
+                user.avatar = '';
                 
                 for(let i = 0; i < users.length; i++) {
                     if(users[i].id == req.body.user.id) {
                         users[i].username = req.body.user.username;
                         users[i].email = req.body.user.email;
                         users[i].permission = req.body.user.permission;
+                        users[i].avatar = req.body.user.avatar;
 
                         user.id = users[i].id;
                         user.username = users[i].username;
                         user.email = users[i].email;
                         user.permission = users[i].permission;
+                        user.avatar = users[i].avatar;
                     }
                 }
 

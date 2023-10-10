@@ -24,6 +24,7 @@ module.exports = function (app, path, fs) {
                                     "email": req.body.email, 
                                     "pwd": req.body.pwd,
                                     "permission": "user",
+                                    "avatar": "",
                                     "id": users.length + 1});
 
                 fs.writeFile("data/users.json", JSON.stringify(users), (err) => {
