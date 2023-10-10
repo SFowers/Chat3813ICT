@@ -1,6 +1,25 @@
-module.exports = function (app, path, fs) {
-    
-    app.post("/api/auth", function (req, res) {
+module.exports = function (app, db) {
+    app.post("/api/login", async (req, res) => {
+        if(!req.body) {
+            return res.sendStatus(400);
+        }
+        //console.log(req.body);
+        const user = req.body;
+
+        const collection = db.collection('users');
+        let u = await collection.findOne({'username':user.username});
+        if(u) {
+            u.pwd = '';
+            u.id = u._id;
+            res.send(u);
+        } else {
+            res.sendStatus(200);
+        }
+    })
+}
+
+/* OLD
+app.post("/api/auth", function (req, res) {
         if(!req.body) {
             return res.sendStatus(400);
         }
@@ -40,4 +59,5 @@ module.exports = function (app, path, fs) {
             }
         })
     });
-}
+
+*/

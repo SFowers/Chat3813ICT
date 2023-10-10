@@ -1,6 +1,29 @@
-module.exports = function (app, path, fs) {
-    
-    app.post("/api/updateuser", function (req, res) {
+module.exports = function (app, db, ObjectId) {
+    app.post("/api/updateuser", async (req, res) => {
+        if(!req.body) {
+            return res.sendStatus(400);
+        }
+        const user = req.body.user;
+        var _id = new ObjectId(user.id);
+
+        const collection = db.collection('users');
+        let u = await collection.findOne({'_id': _id});
+        if(u) {
+            collection.updateOne({'_id': _id}, 
+            {$set:{email: user.email, username: user.username, avatar: user.avatar}});
+
+            let result = await collection.findOne({'_id': _id});
+            result.pwd = '';
+            result.id = result._id;
+            res.send(result);
+        } else {
+            res.sendStatus(200);
+        }
+    })
+}
+
+/* OLD
+app.post("/api/updateuser", function (req, res) {
         if(!req.body) {
             return res.sendStatus(400);
         }
@@ -50,4 +73,4 @@ module.exports = function (app, path, fs) {
             }
         })
     });
-}
+*/

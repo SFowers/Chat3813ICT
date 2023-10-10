@@ -1,6 +1,33 @@
-module.exports = function (app, path, fs) {
-    
-    app.post("/api/signup", function (req, res) {
+module.exports = function (app, db) {
+    app.post("/api/signup", async (req, res) => {
+        if(!req.body) {
+            return res.sendStatus(400);
+        }
+        console.log(req.body);
+        const user = req.body;
+        //{"username":"super","email":"super@admin.com","pwd":"123","permission":"super admin","id":1,"avatar":"bailey.jpg"}
+
+        user.permission = "user";
+        user.avatar = "";
+
+        const collection = db.collection('users');
+        let u = await collection.findOne({'username':user.username});
+        if(!u) { //if u doesn't already exist
+            try {
+                collection.insertOne(user);
+                res.send({success: true, err: null})
+            } catch (e) {
+                console.log(e);
+                res.send({success: false, err:"unable to add user"});
+            }
+        } else {
+            res.send({success: false, err:"duplicate user"});
+        }
+    })
+}
+
+/* OLD
+app.post("/api/signup", function (req, res) {
         if(!req.body) {
             return res.sendStatus(400);
         }
@@ -41,4 +68,5 @@ module.exports = function (app, path, fs) {
             }
         })
     });
-}
+
+*/

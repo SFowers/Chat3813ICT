@@ -21,8 +21,8 @@ export class AuthService {
   signup(email:string, username:string, pwd:string) {
     return this.http.post<User>('http://localhost:3000/api/signup', {email: email, username: username, pwd: pwd});
   }
-  login(email:string, pwd:string) {
-    return this.http.post<User>('http://localhost:3000/api/auth', {email: email, pwd: pwd});
+  login(username:string, pwd:string) {
+    return this.http.post<User>('http://localhost:3000/api/login', {username: username, pwd: pwd});
   }
   updateUser(user:User) {
     return this.http.post<User>('http://localhost:3000/api/updateuser', {user: user});

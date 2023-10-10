@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent {
   newuser:User = new User();
-  email:string = "";
+  username:string = "";
   pwd:string = "";
   loggedin:boolean = false;
 
@@ -26,9 +26,9 @@ export class LoginComponent {
   }
   signin(event:any) {
     console.log('at signin');
-    console.log(this.email, this.pwd);
+    console.log(this.username, this.pwd);
     event.preventDefault();
-    this.auth.login(this.email, this.pwd).subscribe({
+    this.auth.login(this.username, this.pwd).subscribe({
       next:
         (data)=>{
           if(data.id != 0) {

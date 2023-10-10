@@ -1,4 +1,4 @@
-module.exports = function (app, path, fs) {
+module.exports = function (app, fs) {
     
     app.post("/api/creategroup", function (req, res) {
         if(!req.body) {

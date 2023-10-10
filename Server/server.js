@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { PeerServer } = require('peer');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const cors = require('cors');
 const formidable = require('formidable');
 
@@ -48,22 +48,27 @@ async function main() {
         //users = await db.collection("users");
         //users.insertOne({user: "Sean", groups: ['g1']});
 
+        require('./routes/api-signup.js')(app, db);
+        require('./routes/api-login.js')(app, db);
+        require('./routes/api-updateuser.js')(app, db, ObjectId);
+        require('./routes/api-getusers.js')(app, db);
+
     } catch(e) {
         console.log(e);
     }
 }main().catch(console.error);
 
-require('./routes/api-login.js')(app, path, fs);
-require('./routes/api-signup.js')(app, path, fs);
-require('./routes/api-updateuser.js')(app, path, fs);
-require('./routes/api-creategroup.js')(app, path, fs);
+
+
+
+require('./routes/api-creategroup.js')(app, fs);
 require('./routes/api-getgroups.js')(app, fs);
 require('./routes/api-deletegroup.js')(app, fs);
 require('./routes/api-deleteuser.js')(app, fs);
 require('./routes/api-adminapplication.js')(app, fs);
 require('./routes/api-getapplications.js')(app, fs);
 require('./routes/api-updategroup.js')(app, fs);
-require('./routes/api-getusers.js')(app, fs);
+
 require('./routes/api-upload.js')(app, formidable, path, fs);
 
 sockets.connect(io, PORT);
