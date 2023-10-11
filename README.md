@@ -5,7 +5,7 @@
 # Git
 
 The Git Repo containers the front-end and back-end portions in one folder to keep everything organised and together in the single repo. In the CHAT3813 folder, navigate to the Server folder to find everything related to the server code.
-I did not feel like i needed to use additional git features for the project at this time, my project was mostly straightforward without major reworks. Though i can see myself using the branch feature for assignment 2 work, and depending on if i need to restructure my current project.
+I used only the basic push and pull features of git, as most of my work felt straightforward. I could have used the branching feature for when I updated the server to use Mongo, but i did not feel like it required its use.
 
 # Data Structures
 
@@ -16,6 +16,7 @@ User which consists of:
 - email:string
 - username:string
 - permission:string
+- avatar:string
 - pwd:string
 
 There are the basic details of a user profile. Use email or username to login, and the permission grants you access depending on if you are a 'user', 'group admin' or a 'super admin'.
@@ -46,6 +47,14 @@ The super admin must navigate to the account page and then navigate to the super
 
 Users can change their username or emails and can delete their account.
 
+# MONGO DATABASE
+
+Serverside code now fully utilises a mongo database.
+The mongo database Chat3813 uses two collections, "users" and "groups".
+The collections follow the same data structures as listed above. Backend routes are easily updated
+and changed with the new MongoDB. It's addition allows for quicker data retrieval and an easier way
+to handle any requests.
+
 # REST API
 
 Routes:
@@ -71,7 +80,7 @@ Routes:
   - returns
     - group:Group[] class array
 - /api/signup
-  - adds new user to user list.
+  - adds new user to users collection.
   - parameters
     - email:string
     - username: string
@@ -101,18 +110,49 @@ Routes:
     - user:User class
   - returns
     - user:User class
+- /api/upload
+  - uploads an image to the server allowing access throughout the site.
+  - returns
+    - Object{
+      result:string indicating upload result
+      data: Object {filename:string for image name, size:num for image size},
+      numberOfImages:num = 1 indicating number of images uploaded. Should be 1 on success.
+      message::string
+      }
 
 These are accessed through the auth service and the group service in the angular program.
+
+# Sockets
+
+Sockets has been implemented and is used for the purpose of communicating information between clients. For this project is has been used for a realtime chatting page on the website, where users can send and recieve messages in specified channels of each group they are apart of. Sockets also handles some of the information used for streaming video, and starting/ending calls made on the chat page.
+
+# Tests
+
+Tests using mocha and chai have been implemented on the backend serverside code. Each route used has been tested and updated to ensure they function exactly as expected. New error messages on the frontend website have been implemented due to these tests.
+
+Testing on the angular side code has not been implemented.
 
 # Angular Architecture
 
 ## Components
 
+- app
+  - Displays the nav bar, linking to other pages.
+  - Displays user account information such as their username and avatar to indicate they are logged in.
+  - Displays the users current groups that they are members of for quick navigation to them.
 - account
   - displays the account information, allows user to change details or delete their account.
+  - user can upload an avatar (image) to display on their account page and when they are chatting.
   - Super admins navigate to super-controls component from here.
 - chat
-  - Chat with sockets (not properly implemented yet.)
+  - Realtime chatrooms using sockets.
+  - Users join a chat channels after joining a channel from the group page.
+  - Users are notified when a new person joins the channel.
+  - User messages are displayed with their username, avatar current date/time and their message.
+  - Video calls are available on this page.
+  - A user can begin streaming their camera or their screen.
+  - Once streaming, users can click on their id to call them.
+  - Users can end the call/video stream.
 - group
   - Displays the individual group details and navigation to different channels
   - admins can allow users to join or promote them to admins
@@ -179,6 +219,7 @@ There are 2 services used throughout this project. The application service and s
   - email:string
   - pwd:string
   - permission:string
+  - avatar:string
 - Group
   - id:number
   - groupname:string
@@ -186,7 +227,3 @@ There are 2 services used throughout this project. The application service and s
   - users:string[]
   - channels:string[]
   - applied:string[]
-
-## Additional Notes
-
-I was unable to complete my css work in time, the website is functional with only 1 slight bug (when deleting a group, the page needs to be refreshed to display it).

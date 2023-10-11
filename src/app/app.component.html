@@ -10,6 +10,8 @@
       <!--<li class="nav-item"><button id="Logout" (click)="logOut($event)">Logout</button></li>-->
     </ul>
     <div class="nav-container" *ngIf="!checkUser()">
+      <h2>{{currentUser.username}}</h2>
+      <img class="user-avatar" src="http://localhost:3000\images\{{currentUser.avatar}}">
       <h2>My Groups</h2>
       <ul class="group-list">
         <li *ngFor="let g of myGroups" class="gl-item">
