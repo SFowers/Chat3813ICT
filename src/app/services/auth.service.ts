@@ -19,7 +19,7 @@ export class AuthService {
     }
   }
   signup(email:string, username:string, pwd:string) {
-    return this.http.post<User>('http://localhost:3000/api/signup', {email: email, username: username, pwd: pwd});
+    return this.http.post<any>('http://localhost:3000/api/signup', {email: email, username: username, pwd: pwd});
   }
   login(username:string, pwd:string) {
     return this.http.post<User>('http://localhost:3000/api/login', {username: username, pwd: pwd});
@@ -41,7 +41,7 @@ export class AuthService {
     return this.http.get<string>('http://localhost:3000/api/getusers', {});
   }
   deleteUser(user:User) {
-    return this.http.post<string>('http://localhost:3000/api/deleteuser', {user: user});
+    return this.http.post<any>('http://localhost:3000/api/deleteuser', {user: user});
   }
   imgupload(fd:any){
     return this.http.post<any>('http://localhost:3000/api/upload', fd);

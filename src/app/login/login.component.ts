@@ -14,6 +14,7 @@ export class LoginComponent {
   username:string = "";
   pwd:string = "";
   loggedin:boolean = false;
+  error:string = "";
 
   constructor(private router:Router, private auth:AuthService) {}
 
@@ -38,6 +39,7 @@ export class LoginComponent {
             this.router.navigate(['/groups']);
           } else {
             console.log("There is a problem with the credentials" + JSON.stringify(data));
+            this.error = data.username;
           }   
         }
     })

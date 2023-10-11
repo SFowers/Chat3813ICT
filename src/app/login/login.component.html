@@ -14,6 +14,11 @@
                 <button type="button" class="btn btn-primary" type="submit">Submit</button>
             </div>
         </form>
+        <div class="error-container" *ngIf="error">
+            <h3 class="error-message">
+                ERROR: {{error}}
+            </h3>
+        </div>
     </div>
     <div class="nav-item" *ngIf="loggedin">
         <h3>You are already logged in.</h3>

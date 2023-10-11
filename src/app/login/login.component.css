@@ -54,3 +54,6 @@ a:hover {
     color:#4788c5;
     transition-duration: 0.3s;
 }
+.error-message {
+    color: red;
+}

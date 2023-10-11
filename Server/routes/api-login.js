@@ -8,12 +8,13 @@ module.exports = function (app, db) {
 
         const collection = db.collection('users');
         let u = await collection.findOne({'username':user.username});
-        if(u) {
+        if(u.pwd === user.pwd) {
             u.pwd = '';
             u.id = u._id;
             res.send(u);
         } else {
-            res.sendStatus(200);
+            res.send({id: 0, email:'',username: 'Incorrect Credentials', pwd:'', permission:'', avatar:''});
+            //res.sendStatus(200);
         }
     })
 }

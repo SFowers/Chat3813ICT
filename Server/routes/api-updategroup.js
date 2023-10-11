@@ -4,12 +4,15 @@ module.exports = function (app, db, ObjectId) {
             return res.sendStatus(400);
         }
         const group = req.body.group;
+        //console.log(group.id);
         var _id = new ObjectId(group.id);
+
+        //console.log(group, _id);
 
         const collection = db.collection('groups');
         let g = await collection.findOne({'_id': _id});
         if(g) {
-            collection.updateOne({'_id': _id}, 
+            await collection.updateOne({'_id': _id}, 
             {$set:{groupname: group.groupname, admins: group.admins, 
                 users: group.users, channels: group.channels, applied: group.applied}});
 

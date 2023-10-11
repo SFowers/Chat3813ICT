@@ -21,8 +21,11 @@ const sslOptions = {
     cert: fs.readFileSync('cert.pem')
 };
 
-const http = require('http').Server(sslOptions, app);
 //const http = require('http').Server(app);
+const http = require('http').Server(sslOptions, app);
+
+const https = require('https');
+
 
 app.use('/images',express.static(path.join(__dirname, './userimages')));
 
@@ -44,9 +47,6 @@ async function main() {
         await client.connect();
         let db = client.db("Chat3813");
         console.log("DB Connected");
-        //users = await db.collection("users").find({}).toArray();
-        //users = await db.collection("users");
-        //users.insertOne({user: "Sean", groups: ['g1']});
 
         // USER ROUTES
         require('./routes/api-signup.js')(app, db);
@@ -70,9 +70,6 @@ async function main() {
 //require('./routes/api-adminapplication.js')(app, fs);
 //require('./routes/api-getapplications.js')(app, fs);
 
-
-
-
 sockets.connect(io, PORT);
 server.listen(http, PORT);
 
@@ -83,24 +80,7 @@ PeerServer({
 });
 console.log(`Starting SSL PeerServer at: ${PORT}`);
 
-/*
-MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
-    if (err) {
-        console.error('Error connecting to MongoDB:', err);
-        return;
-    }
-
-    console.log('Connected to MongoDB server');
-
-    const db = client.db(dbName);
-
-    //require('./routes/add.js')(app, db);
-    //require('./routes/read.js')(app, db);
-    //require('./routes/update.js')(app, db, ObjectID);
-    //require('./routes/remove.js')(app, db, ObjectID);
-
-    app.listen(port, () => {
-        console.log('App is listening on port ' + port);
-    });
-});
-*/
+module.exports = {
+    app: app,
+    http: http
+};

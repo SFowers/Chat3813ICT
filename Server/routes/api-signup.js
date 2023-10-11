@@ -21,6 +21,7 @@ module.exports = function (app, db) {
                 res.send({success: false, err:"unable to add user"});
             }
         } else {
+            console.log('Duplicate User');
             res.send({success: false, err:"duplicate user"});
         }
     })

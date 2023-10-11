@@ -116,8 +116,12 @@ export class GroupsComponent {
       this.groupService.createGroup(this.groupname, this.currentUser.username).subscribe({
         next:
           (res)=>{
-            console.log(res.groupname);
-            this.ngOnInit();
+            if(res.id != 0) {
+              console.log(res.groupname);
+              this.ngOnInit();
+            } else {
+              this.error = res.groupname;
+            }
           }
       })
     }

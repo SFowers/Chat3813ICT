@@ -6,17 +6,18 @@ module.exports = function (app, db, ObjectId) {
         const group = req.body.group;
         var _id = new ObjectId(group.id);
 
+        //console.log(group, _id);
+
         const collection = db.collection('groups');
         let g = await collection.findOne({'_id': _id});
         if(g) {
-            collection.deleteOne({'_id': _id}, (err, docs) => {
-                if(err) {
-                    res.sendStatus(err);
-                } else {
-                    console.log("Group deleted successfully\n");
-                    res.send("Group deleted successfully");
-                }
-            })
+            let result = await collection.deleteOne({'_id': _id})
+            if(result.deletedCount === 1) {
+                console.log("Group deleted successfully\n");
+                return res.send({msg:"Group deleted successfully"});
+            } else {
+                res.sendStatus(500);
+            }
         } else {
             res.sendStatus(200);
         }

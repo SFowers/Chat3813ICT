@@ -6,19 +6,23 @@ module.exports = function (app, db, ObjectId) {
         const user = req.body.user;
         var _id = new ObjectId(user.id);
 
+        //console.log('_ID: ',_id);
+
         const collection = db.collection('users');
         let u = await collection.findOne({'_id': _id});
         if(u) {
-            collection.deleteOne({'_id': _id}, (err, docs) => {
-                if(err) {
-                    res.sendStatus(err);
-                } else {
-                    console.log("User deleted successfully\n");
-                    res.send("User deleted successfully");
-                }
-            })
+            console.log('user found');
+            let result = await collection.deleteOne({'_id': _id});
+            //console.log(result);
+            if(result.deletedCount === 1) {
+                console.log("User deleted successfully\n");
+                return res.send({msg: "User deleted successfully"});
+            } else {
+                res.sendStatus(500);
+            }
         } else {
-            res.sendStatus(200);
+            console.log('User Not Found');
+            res.sendStatus(404);
         }
     })
     

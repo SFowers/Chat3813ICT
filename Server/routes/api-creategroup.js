@@ -9,7 +9,7 @@ module.exports = function (app, db) {
 
         const collection = db.collection('groups');
         let g = await collection.findOne({'groupname': group.groupname});
-        if(!g) { //if u doesn't already exist
+        if(!g) { //if g doesn't already exist
             try {
                 newgroup = {}
                 newgroup.groupname = group.groupname;
@@ -19,18 +19,18 @@ module.exports = function (app, db) {
                 newgroup.applied = [];
                 collection.insertOne(newgroup);
                 console.log('Group Successfully Created.');
-                let ng = collection.findOne({'groupname': group.groupname})
-                res.send({group: ng});
+                let ng = await collection.findOne({'groupname': group.groupname})
+                //console.log('ng:',ng);
+                ng.id = ng._id;
+                return res.send({group: ng});
             } catch (e) {
                 console.log(e);
-                res.send({success: false, err:"unable to add group"});
+                res.sendStatus(500);
             }
         } else {
-            res.send({success: false, err:"duplicate group"});
+            res.send({id: 0, groupname: "duplicate group", admins:[], users:[], channels:[], applied:[]});
         }
     })
-    
-    
 }
 
 /* OLD
