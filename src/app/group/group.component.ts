@@ -33,7 +33,12 @@ export class GroupComponent {
   ngOnInit() {
     this.actRoute.paramMap.subscribe(params => {
       const groupname = params.get('groupname');
+      
       this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
+      if(this.currentUser == null) {
+        this.router.navigate(['/login']);
+      }
+
       this.currentGroup = JSON.parse(this.groupService.getCurrentGroup() || '{}');
       if(this.currentGroup.groupname != groupname) {
         this.router.navigateByUrl('/groups');

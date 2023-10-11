@@ -10,7 +10,7 @@ module.exports = function (app, db, ObjectId) {
         let u = await collection.findOne({'_id': _id});
         if(u) {
             collection.updateOne({'_id': _id}, 
-            {$set:{email: user.email, username: user.username, avatar: user.avatar}});
+            {$set:{email: user.email, username: user.username, permission: user.permission, avatar: user.avatar}});
 
             let result = await collection.findOne({'_id': _id});
             result.pwd = '';

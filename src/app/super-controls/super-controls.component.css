@@ -1,0 +1,57 @@
+.supercontrols-container {
+    background-color: #1f2831;
+    color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.supercontrols-container h1 {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.user-list-container {
+    background-color: #32434d;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-list-container h3 {
+    font-size: 18px;
+    color: white;
+    margin: 10px 0;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    max-width: 50vw;
+    max-height: 50vh;
+}
+
+.user-list li {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.user-list button {
+    background-color: #4f687a;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.user-list button:hover {
+    background-color: #80a7c4;
+}

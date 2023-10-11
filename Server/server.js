@@ -54,28 +54,24 @@ async function main() {
         require('./routes/api-updateuser.js')(app, db, ObjectId);
         require('./routes/api-getusers.js')(app, db);
         require('./routes/api-deleteuser.js')(app, db, ObjectId);
+        require('./routes/api-upload.js')(app, formidable, path, fs);
 
         // GROUP ROUTES
         require('./routes/api-creategroup.js')(app, db);
         require('./routes/api-getgroups.js')(app, db);
+        require('./routes/api-deletegroup.js')(app, db, ObjectId);
+        require('./routes/api-updategroup.js')(app, db, ObjectId);
 
     } catch(e) {
         console.log(e);
     }
 }main().catch(console.error);
 
+//require('./routes/api-adminapplication.js')(app, fs);
+//require('./routes/api-getapplications.js')(app, fs);
 
 
 
-
-
-require('./routes/api-deletegroup.js')(app, fs);
-
-require('./routes/api-adminapplication.js')(app, fs);
-require('./routes/api-getapplications.js')(app, fs);
-require('./routes/api-updategroup.js')(app, fs);
-
-require('./routes/api-upload.js')(app, formidable, path, fs);
 
 sockets.connect(io, PORT);
 server.listen(http, PORT);

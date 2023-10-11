@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Application } from '../application';
-import { ApplicationsService } from '../services/applications.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-super-controls',
@@ -10,32 +9,28 @@ import { User } from '../user';
   styleUrls: ['./super-controls.component.css']
 })
 export class SuperControlsComponent {
-  applications:Application[] = [];
+  currentUser:User = new User();
   users:User[] = [];
   gadmin:string = 'group admin';
   sadmin:string = 'super admin';
+  user:string = 'user';
 
-  constructor(private applService:ApplicationsService, private auth:AuthService) {}
+  constructor(private auth:AuthService, private router:Router) {}
 
   ngOnInit() {
+    this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
+    if(this.currentUser == null || this.currentUser.permission !== this.sadmin) {
+      this.router.navigate(['/login']);
+    }
     this.auth.getAllUsers().subscribe({
       next: (data) => {
         //This is the only way it works for some reason
         this.users = JSON.parse(JSON.stringify(data));
       }
     })
-    /*
-    this.applService.getApplications().subscribe({
-      next: (data) => {
-        console.log(this.applications);
-        this.applications = JSON.parse(data);
-        console.log(this.applications);
-      }
-    });
-    */
   }
 
-  makeAdmin(user:User, perm:string) {
+  changePermission(user:User, perm:string) {
     user.permission = perm;
     this.auth.updateUser(user).subscribe({
       next:

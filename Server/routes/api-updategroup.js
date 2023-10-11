@@ -1,5 +1,29 @@
-module.exports = function (app, fs) {
-    app.post('/api/updategroup', function (req, res) {
+module.exports = function (app, db, ObjectId) {
+    app.post("/api/updategroup", async (req, res) => {
+        if(!req.body) {
+            return res.sendStatus(400);
+        }
+        const group = req.body.group;
+        var _id = new ObjectId(group.id);
+
+        const collection = db.collection('groups');
+        let g = await collection.findOne({'_id': _id});
+        if(g) {
+            collection.updateOne({'_id': _id}, 
+            {$set:{groupname: group.groupname, admins: group.admins, 
+                users: group.users, channels: group.channels, applied: group.applied}});
+
+            let result = await collection.findOne({'_id': _id});
+            result.id = result._id;
+            res.send(result);
+        } else {
+            res.sendStatus(200);
+        }
+    })
+}
+
+/* OLD
+app.post('/api/updategroup', function (req, res) {
         if(!req.body) {
             return res.sendStatus(400);
         }
@@ -39,4 +63,5 @@ module.exports = function (app, fs) {
             }
         })
     });
-}
+
+*/

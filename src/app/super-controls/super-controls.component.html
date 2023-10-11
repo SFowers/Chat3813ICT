@@ -1,15 +1,16 @@
-
 <div class="supercontrols-container">
     <h1>New Applications</h1>
     <div class="user-list-container">
-        <h3>Make User admin permissions</h3>
-        <ul *ngFor="let u of users">
+        <h3>Change User admin permissions</h3>
+        <ul *ngFor="let u of users" class="user-list">
             
-            <li *ngIf="u.permission != sadmin">  
+            <li *ngIf="u.username != currentUser.username">  
                 <div>
-                    <p>Username: {{u.username}} Permission: {{u.permission}}</p>
-                    <button *ngIf="u.permission != gadmin" (click)="makeAdmin(u, gadmin)">Group Admin</button>
-                    <button (click)="makeAdmin(u, sadmin)">Super Admin</button>
+                    <p>Username: {{u.username}}</p>
+                    <p>Permission: {{u.permission}}</p>
+                    <button *ngIf="u.permission != user" (click)="changePermission(u, user)">User</button>
+                    <button *ngIf="u.permission != gadmin" (click)="changePermission(u, gadmin)">Group Admin</button>
+                    <button *ngIf="u.permission != sadmin" (click)="changePermission(u, sadmin)">Super Admin</button>
                 </div>
             </li>
         </ul>
