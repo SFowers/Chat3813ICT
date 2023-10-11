@@ -47,14 +47,6 @@ The super admin must navigate to the account page and then navigate to the super
 
 Users can change their username or emails and can delete their account.
 
-# MONGO DATABASE
-
-Serverside code now fully utilises a mongo database.
-The mongo database Chat3813 uses two collections, "users" and "groups".
-The collections follow the same data structures as listed above. Backend routes are easily updated
-and changed with the new MongoDB. It's addition allows for quicker data retrieval and an easier way
-to handle any requests.
-
 # REST API
 
 Routes:
@@ -122,7 +114,15 @@ Routes:
 
 These are accessed through the auth service and the group service in the angular program.
 
-# Sockets
+## MONGO DATABASE
+
+Serverside code now fully utilises a mongo database.
+The mongo database Chat3813 uses two collections, "users" and "groups".
+The collections follow the same data structures as listed above. Backend routes are easily updated
+and changed with the new MongoDB. It's addition allows for quicker data retrieval and an easier way
+to handle any requests.
+
+## Sockets
 
 Sockets has been implemented and is used for the purpose of communicating information between clients. For this project is has been used for a realtime chatting page on the website, where users can send and recieve messages in specified channels of each group they are apart of. Sockets also handles some of the information used for streaming video, and starting/ending calls made on the chat page.
 
