@@ -20,7 +20,7 @@ export class GroupService {
   }
 
   getAllGroups() {
-    return this.http.get<string>('http://localhost:3000/api/getgroups', {});
+    return this.http.get<Group[]>('http://localhost:3000/api/getgroups', {});
   }
 
   setCurrentGroup(group:any) {

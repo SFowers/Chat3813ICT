@@ -1,6 +1,40 @@
-module.exports = function (app, fs) {
+module.exports = function (app, db) {
+    app.post("/api/creategroup", async (req, res) => {
+        if(!req.body) {
+            return res.sendStatus(400);
+        }
+        console.log(req.body);
+        const group = req.body;
+        //{"groupname":"supergroup","admins":["super"],"users":["super","sean"],"channels":["chan1","chan2","cool channel","fourth chan","test","a","b","c","d"],"applied":[],"id":1}
+
+        const collection = db.collection('groups');
+        let g = await collection.findOne({'groupname': group.groupname});
+        if(!g) { //if u doesn't already exist
+            try {
+                newgroup = {}
+                newgroup.groupname = group.groupname;
+                newgroup.admins = [group.username];
+                newgroup.users = [group.username];
+                newgroup.channels = [];
+                newgroup.applied = [];
+                collection.insertOne(newgroup);
+                console.log('Group Successfully Created.');
+                let ng = collection.findOne({'groupname': group.groupname})
+                res.send({group: ng});
+            } catch (e) {
+                console.log(e);
+                res.send({success: false, err:"unable to add group"});
+            }
+        } else {
+            res.send({success: false, err:"duplicate group"});
+        }
+    })
     
-    app.post("/api/creategroup", function (req, res) {
+    
+}
+
+/* OLD
+app.post("/api/creategroup", function (req, res) {
         if(!req.body) {
             return res.sendStatus(400);
         }
@@ -44,4 +78,4 @@ module.exports = function (app, fs) {
             }
         })
     });
-}
+*/

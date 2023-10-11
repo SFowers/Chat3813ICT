@@ -40,7 +40,7 @@ export class AppComponent {
     this.allGroups = [];
     this.groupService.getAllGroups().subscribe({
       next: (data) => {
-        this.allGroups = JSON.parse(data);
+        this.allGroups = data;
         //console.log("allgroups: " + this.allGroups[0].groupname);
         this.getMyGroups();
       }

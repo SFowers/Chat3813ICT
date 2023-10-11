@@ -48,11 +48,16 @@ async function main() {
         //users = await db.collection("users");
         //users.insertOne({user: "Sean", groups: ['g1']});
 
+        // USER ROUTES
         require('./routes/api-signup.js')(app, db);
         require('./routes/api-login.js')(app, db);
         require('./routes/api-updateuser.js')(app, db, ObjectId);
         require('./routes/api-getusers.js')(app, db);
         require('./routes/api-deleteuser.js')(app, db, ObjectId);
+
+        // GROUP ROUTES
+        require('./routes/api-creategroup.js')(app, db);
+        require('./routes/api-getgroups.js')(app, db);
 
     } catch(e) {
         console.log(e);
@@ -62,8 +67,8 @@ async function main() {
 
 
 
-require('./routes/api-creategroup.js')(app, fs);
-require('./routes/api-getgroups.js')(app, fs);
+
+
 require('./routes/api-deletegroup.js')(app, fs);
 
 require('./routes/api-adminapplication.js')(app, fs);

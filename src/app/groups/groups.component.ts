@@ -36,7 +36,8 @@ export class GroupsComponent {
     this.allGroups = [];
     this.groupService.getAllGroups().subscribe({
       next: (data) => {
-        this.allGroups = JSON.parse(data);
+        console.log(data);
+        this.allGroups = data;
         //console.log("allgroups: " + this.allGroups[0].groupname);
         this.getMyGroups();
       }
