@@ -85,7 +85,7 @@ export class GroupComponent {
 
   onSelect(channel:string) {
     console.log(channel)
-    this.router.navigate(['/chat']);
+    this.router.navigate(['/chat', channel]);
   }
 
   updateGroup() {

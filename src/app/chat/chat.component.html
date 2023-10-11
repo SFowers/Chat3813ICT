@@ -1,42 +1,53 @@
 <div class="container">
 <div class="chat-container">
-    <h2>Chat</h2>
-    <form>
-        <div>
-            <label for="rooms">Select a room</label>
-            <select [(ngModel)]="chosenRoom" name="roomList">
-                <option [ngValue]="null">Select Room</option>
-                <option *ngFor="let room of rooms">
-                    {{room}}
-                </option>
-            </select>
-        </div>
-        <div>
-            <button *ngIf="!isInRoom" (click)="joinRoom()">Join</button>
-            <button *ngIf="isInRoom" (click)="leaveRoom()">Leave</button>
-        </div>
-        <div class="form-message">
-            <label for="messageOut">New Message</label>
-            <input type="text" [(ngModel)]="messageOut" name="messageOut" id="messageOut" />
-        </div>
-        <div class="form-message">
-            <button *ngIf="isInRoom" (click)="chat()" class="chat-button">Send</button>
-        </div>
-    </form>
+    <h1>Chat</h1>
     <div class="chat-list-container">
         <ul>
-            <li *ngFor="let m of messageIn">{{m.datetime | date: 'dd/MM/yyy'}} - {{m.message}}</li>
+            <li class="chat-item" *ngFor="let m of messageIn">
+                <div class="message-details">
+                    <img *ngIf="m.avatar" class="user-avatar" src="http://localhost:3000\images\{{m.avatar}}">
+                    <h3>{{m.username}}</h3>
+                    <p>{{m.datetime | date: 'dd/MM/yyyy, HH:mm'}}</p>
+                </div>
+                <p>{{m.message}}</p>
+            </li>
         </ul>
+        
+        <form class="send-message-form">
+            <!--
+            <div>
+                <label for="rooms">Select a room</label>
+                <select [(ngModel)]="chosenRoom" name="roomList">
+                    <option [ngValue]="null">Select Room</option>
+                    <option *ngFor="let room of rooms">
+                        {{room}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <button *ngIf="!isInRoom" (click)="joinRoom()">Join</button>
+                <button *ngIf="isInRoom" (click)="leaveRoom()">Leave</button>
+            </div>
+            -->
+            <div class="form-message">
+                <label for="messageOut">New Message</label>
+                <input type="text" [(ngModel)]="messageOut" name="messageOut" id="messageOut" />
+            </div>
+            <div class="form-message">
+                <button *ngIf="isInRoom" (click)="chat()" class="chat-button">Send</button>
+            </div>
+        </form>
     </div>
 </div>
 
 <div class="video-container">
+    <h1>Video</h1>
     <div>
         <button (click)="streamCamera()">Stream with Camera</button>
         <button (click)="streamScreen()">Stream with Screen</button>
         <button (click)="endCall(currentCall)">End Call</button>
     </div>
-    <h2>Peers</h2>
+    <h1>Peers</h1>
     <ul>
         <li *ngFor="let peerID of peerList" (click)="calling(peerID)">
             <span>{{peerID}}</span>

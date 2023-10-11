@@ -1,6 +1,6 @@
 module.exports = {
     connect: function (io, PORT) {
-        let rooms = ['room1', 'room2', 'room3'];
+        let rooms = [];
         const users = {};
         //const chat = io.of('/chat');
         io.on('connect', (socket) => {
@@ -12,8 +12,13 @@ module.exports = {
                 io.emit('roomList', JSON.stringify(rooms));
             })
 
+            socket.on('userCount', (room) => {
+                users[socket.id] = {room};
+                io.emit('userCount', );
+            })
+
             socket.on('message', (message) => {
-                //console.log('message recieved');
+                console.log(JSON.stringify(message));
                 const user = users[socket.id];
                 if(user) {
                     io.to(user.room).emit('message', message)
@@ -39,8 +44,14 @@ module.exports = {
                 if(rooms.includes(room)) {
                     users[socket.id] = {room};
                     socket.join(room);
-                    socket.to(room).emit('message', "A new user has joined the room");
-                    socket.emit('message', "Welcome to the chat room");
+                    socket.to(room).emit('message', {message:"A New User has joined " + room, date: new Date(), id:1, username:'', avatar:''});
+                    socket.emit('message', {message:"Welcome to " + room, date: new Date(), id:1, username:'', avatar:''});
+                } else {
+                    rooms.push(room);
+                    users[socket.id] = {room};
+                    socket.join(room);
+                    socket.to(room).emit('message', {message:"A New User has joined " + room, date: new Date(), id:1, username:'', avatar:''});
+                    socket.emit('message', {message:"Welcome to " + room, date: new Date(), id:1, username:'', avatar:''});
                 }
             });
 

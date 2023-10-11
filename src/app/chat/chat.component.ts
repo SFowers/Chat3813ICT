@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { SocketsService } from '../services/sockets.service';
 import { AuthService } from '../services/auth.service';
 import { GroupService } from '../services/group.service';
@@ -65,10 +67,15 @@ export class ChatComponent implements OnInit{
   constructor(private socket:SocketsService,
               private auth:AuthService,
               private groupService:GroupService,
-              private peerService:PeerService) {}
+              private peerService:PeerService,
+              private actRoute:ActivatedRoute) {}
 
   ngOnInit() {
     this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
+
+    this.actRoute.paramMap.subscribe(params => { 
+      this.chosenRoom = params.get('channel') || '';
+    })
 
     this.initIoConnection();
     this.socket.reqRoomList();
@@ -79,11 +86,14 @@ export class ChatComponent implements OnInit{
         this.peerList.push(peerID);
       }
     })
+
+    this.joinRoom();
   }
 
   private initIoConnection() {
     this.socket.initSocket();
     this.socket.getMessage().subscribe((messages:any) => {
+      //console.log(messages);
       this.messageIn.push(messages);
     })
     /*
@@ -108,7 +118,7 @@ export class ChatComponent implements OnInit{
   }
   chat() {
     if(this.messageOut) {
-      this.socket.sendMessage(this.messageOut);
+      this.socket.sendMessage(this.messageOut, this.currentUser.username, this.currentUser.avatar);
       this.messageOut = "";
     } else {
       console.log("no message");

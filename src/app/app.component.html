@@ -3,8 +3,8 @@
   <div class="navbar">
     <ul class="nav-container">
       <li><h1>Chat3813</h1></li>
-      <li class="nav-item" *ngIf="!currentUser"><a href="/login">Login</a></li>
-      <li class="nav-item" *ngIf="!currentUser"><a href="/signup">Signup</a></li>
+      <li class="nav-item" *ngIf="checkUser()"><a href="/login">Login</a></li>
+      <li class="nav-item" *ngIf="checkUser()"><a href="/signup">Signup</a></li>
       <li class="nav-item" *ngIf="currentUser"><a href="/account">Account</a></li>
       <li class="nav-item" *ngIf="currentUser"><a href="/groups">Groups</a></li>
       <!--<li class="nav-item"><button id="Logout" (click)="logOut($event)">Logout</button></li>-->

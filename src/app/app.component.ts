@@ -26,11 +26,9 @@ export class AppComponent {
 
   ngOnInit() {
     this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
-    console.log(this.currentUser);
+    console.log('currentuser: ' ,this.currentUser);
     if(!this.checkUser()) {
       this.getAllGroups();
-    } else {
-      //this.router.navigate(['/login']);
     }
   }
   checkUser() {

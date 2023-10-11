@@ -11,7 +11,7 @@ import { SuperControlsComponent } from './super-controls/super-controls.componen
 const routes: Routes = [{path: 'login', component: LoginComponent},
                         {path: 'account', component: AccountComponent},
                         {path: 'signup', component: SignupComponent},
-                        {path: 'chat', component: ChatComponent},
+                        {path: 'chat/:channel', component: ChatComponent},
                         {path: 'groups', component: GroupsComponent},
                         {path: 'group/:groupname', component: GroupComponent},
                         {path: 'super', component: SuperControlsComponent}];

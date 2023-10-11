@@ -27,8 +27,8 @@ export class SocketsService {
     return this.obsFromIO(this.socket, 'message');
   }
 
-  public sendMessage(message: string) {
-    this.socket.emit('message', message);
+  public sendMessage(message:string, username:string, avatar:any) {
+    this.socket.emit('message', {message, username, avatar});
   }
 
   peerID(message:string) {
@@ -45,8 +45,8 @@ export class SocketsService {
 
   private obsFromIO(io:any, eventname:any) {
     return new Observable(observer=> {
-      io.on(eventname, (data:string)=> {
-        let msgdata:Message = new Message(data, new Date, 1);
+      io.on(eventname, (data:any)=> {
+        let msgdata:Message = new Message(data.message, new Date, 1, data.username, data.avatar);
         observer.next(msgdata);
       })
     })

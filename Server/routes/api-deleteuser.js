@@ -1,6 +1,31 @@
-module.exports = function (app, fs) {
+module.exports = function (app, db, ObjectId) {
+    app.post("/api/deleteuser", async (req, res) => {
+        if(!req.body) {
+            return res.sendStatus(400);
+        }
+        const user = req.body.user;
+        var _id = new ObjectId(user.id);
+
+        const collection = db.collection('users');
+        let u = await collection.findOne({'_id': _id});
+        if(u) {
+            collection.deleteOne({'_id': _id}, (err, docs) => {
+                if(err) {
+                    res.sendStatus(err);
+                } else {
+                    console.log("User deleted successfully\n");
+                    res.send("User deleted successfully");
+                }
+            })
+        } else {
+            res.sendStatus(200);
+        }
+    })
     
-    app.post("/api/deleteuser", function (req, res) {
+}
+
+/*
+app.post("/api/deleteuser", function (req, res) {
         if(!req.body) {
             return res.sendStatus(400);
         }
@@ -32,4 +57,5 @@ module.exports = function (app, fs) {
             }
         })
     })
-}
+
+*/
