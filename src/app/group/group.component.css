@@ -47,7 +47,6 @@ button:hover {
     flex-direction: column;
 }
 .group-channels-container {
-    
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
@@ -152,6 +151,11 @@ button:hover {
     justify-content: center;
     flex-direction: column;
 }
+.gadmin-list ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 .gadmin-list h3 {
     margin: 20px;
 }
@@ -166,8 +170,8 @@ button:hover {
 .user-button {
     background-color: #4f687a;
     border: none;
-    color: black;
-    width: 100px;
+    color: white;
+    width: 200px;
     padding: 10px;
     margin: 2px;
     text-align: center;
@@ -175,6 +179,7 @@ button:hover {
     display: block;
     font-size: 16px;
     border-radius: 5px;
+    cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -222,4 +227,36 @@ button:hover {
 }
 .delete-group-button:hover {
     background-color: #ff4839; /* Slightly darker red */
+}
+.list-item {
+    background-color: #32434d;
+    border: 1px solid #808f99;
+    border-radius: 5px;
+    color: white;
+    max-width: 220px;
+}
+.appl-button {
+    background-color: #4f687a;
+}
+.appl-button:hover {
+    background-color: #80a7c4;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+  
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+  
+.legend-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border-radius: 15%;
 }

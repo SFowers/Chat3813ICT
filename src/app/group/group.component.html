@@ -25,7 +25,17 @@
             </div>
             <button class="show-settings-button" (click)="showUsers()">Show Users</button>
             <div class="gadmin-list" *ngIf="susers">
-                <h3>Users</h3>
+                <div class="legend">
+                    <h3>{{currentGroup.groupname}} User List</h3>
+                    <span class="legend-item">
+                        <div class="legend-color" style="background-color: #ffae42;"></div>
+                        Admins
+                    </span>
+                    <span class="legend-item">
+                      <div class="legend-color" style="background-color: #4f687a;"></div>
+                        Users
+                    </span>
+                </div>      
                 <ul class="user-list" *ngFor="let u of currentGroup.users">
                     <li class="user-button" *ngIf="!currentGroup.admins.includes(u)" (click)="addAdmin(u)">{{u}} - Add as Admin</li>
                     <li class="admin-user-button" *ngIf="currentGroup.admins.includes(u)">{{u}}</li>
@@ -34,11 +44,12 @@
             <button class="show-settings-button" (click)="showApplications()">Show Applications</button>
             <div class="gadmin-list" *ngIf="sapplications">
                 <h3>Applications</h3>
-                <h4 *ngIf="currentGroup.applied">No new applications</h4>
+                <h4 *ngIf="currentGroup.applied.length === 0">No new applications</h4>
                 <ul *ngFor="let app of currentGroup.applied">
                     <li class="list-item">
-                        <button class="user-button" (click)="addApplicant(app)">Add {{app}}</button>
-                        <button class="user-button" (click)="addApplicant(app)">Remove {{app}}</button>
+                        <h3>{{app}}</h3>
+                        <button class="appl-button" (click)="addApplicant(app)">Add {{app}}</button>
+                        <button class="appl-button" (click)="denyApplicant(app)">Deny {{app}}</button>
                     </li>
                 </ul>
             </div>

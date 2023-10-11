@@ -33,7 +33,7 @@ export class GroupComponent {
   ngOnInit() {
     this.actRoute.paramMap.subscribe(params => {
       const groupname = params.get('groupname');
-      
+
       this.currentUser = JSON.parse(this.auth.getCurrentUser() || '{}');
       if(this.currentUser == null) {
         this.router.navigate(['/login']);
@@ -78,6 +78,14 @@ export class GroupComponent {
       if(this.currentGroup.applied[i] == app) {
         this.currentGroup.applied.splice(i, 1);
         this.currentGroup.users.push(app);
+      }
+    }
+    this.updateGroup();
+  }
+  denyApplicant(app:string) {
+    for(let i = 0; i < this.currentGroup.applied.length; i++) {
+      if(this.currentGroup.applied[i] == app) {
+        this.currentGroup.applied.splice(i, 1);
       }
     }
     this.updateGroup();
